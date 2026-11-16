@@ -727,7 +727,7 @@ function open(id,i){ A=ACTS[id]; I=i; lastFocus=document.activeElement; lb.class
   $('#lbp').style.visibility = $('#lbn').style.visibility = A.media.length>1?'':'hidden';
   show(); $('#lbx').focus(); }
 function show(){ const m=A.media[I];
-  $('#lbt').innerHTML = `${esc(A.title)}<small>foto ${I+1} de ${A.media.length}</small>`;
+  $('#lbt').innerHTML = `${esc(A.title)}<small>${m.t==='v'?'vídeo':'foto'} ${I+1} de ${A.media.length}</small>`;
   $('#lbm').innerHTML = m.t==='v' ? `<video src="${m.src}" poster="${m.poster}" controls playsinline preload="metadata"></video>` : `<img src="${m.src}" alt="${esc(A.title)}, registro ${I+1} de ${A.media.length}">`;
   document.querySelectorAll('#lbstrip button').forEach((b,k)=>{b.setAttribute('aria-current',k===I); if(k===I) b.scrollIntoView({block:'nearest',inline:'center'});}); }
 function go(d){ I=(I+d+A.media.length)%A.media.length; show(); }
