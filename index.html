@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Projeto de Apoio Pedagógico · Professora Claudia Cabral</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Caveat:wght@600;700&family=Nunito:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#2B2D42; --ink-2:#565A73; --paper:#FFFBF2; --grid:#E9E1CF;
+  --red:#FF5A5F; --orange:#FF9F1C; --yellow:#FFD23F; --green:#2EC4B6; --blue:#3A86FF; --purple:#8338EC; --pink:#FF4FA3;
+  --head:"Baloo 2","Trebuchet MS",sans-serif; --body:"Nunito",system-ui,sans-serif; --hand:"Caveat",cursive;
+  --b:3px solid var(--ink); --r:22px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;color:var(--ink);font-family:var(--body);font-size:16.5px;line-height:1.6;-webkit-font-smoothing:antialiased;
+  background-color:var(--paper);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:28px 28px}
+img{max-width:100%;display:block}
+a{color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding:0 clamp(16px,4vw,36px)}
+.skip{position:absolute;left:-999px;top:8px;background:var(--ink);color:#fff;padding:8px 14px;border-radius:8px;z-index:200}
+.skip:focus{left:8px}
+:focus-visible{outline:3px dashed var(--purple);outline-offset:3px}
+#app:focus,#app:focus-visible{outline:none}
+
+/* ---------- header ---------- */
+header.top{position:sticky;top:0;z-index:40;background:var(--paper);border-bottom:var(--b)}
+.top-row{display:flex;align-items:center;gap:14px;height:64px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--head);font-weight:800;font-size:1.25rem;line-height:1}
+.brand small{display:block;font-family:var(--hand);font-weight:700;font-size:1.15rem;color:var(--red);margin-top:2px}
+.logo{width:42px;height:42px;flex:none;transform:rotate(-6deg)}
+.top-links{margin-left:auto;display:flex;gap:8px}
+.top-links a{font-weight:800;text-decoration:none;padding:6px 14px;border-radius:999px;border:2px solid transparent}
+.top-links a:hover,.top-links a[aria-current="page"]{border-color:var(--ink);background:var(--yellow)}
+.chips{display:flex;gap:10px;overflow-x:auto;padding:4px 2px 14px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;display:flex;align-items:center;gap:8px;text-decoration:none;font-weight:800;font-size:.88rem;padding:6px 14px 6px 6px;border:2.5px solid var(--ink);border-radius:999px;background:#fff;box-shadow:3px 3px 0 var(--ink);transition:transform .12s,box-shadow .12s}
+.chip .ico{width:26px;height:26px;border-radius:50%;background:var(--c);display:grid;place-items:center;color:#fff}
+.chip .ico svg{width:16px;height:16px}
+.chip:hover{transform:translate(-1px,-1px);box-shadow:4px 4px 0 var(--ink)}
+.chip[aria-current="page"]{background:var(--c);color:#fff}
+.chip[aria-current="page"] .ico{background:#fff;color:var(--c)}
+
+/* ---------- elementos lúdicos ---------- */
+.hl{position:relative;white-space:nowrap;z-index:0}
+.hl::after{content:"";position:absolute;left:-4px;right:-4px;bottom:.08em;height:.42em;background:var(--yellow);border-radius:6px;z-index:-1;transform:rotate(-1.5deg)}
+.hand{font-family:var(--hand);font-weight:700}
+.doodle{position:absolute;pointer-events:none}
+.sticker{display:inline-flex;align-items:center;gap:6px;font-weight:800;font-size:.8rem;letter-spacing:.04em;text-transform:uppercase;padding:4px 12px;border:2.5px solid var(--ink);border-radius:999px;background:var(--c,var(--yellow));color:#fff;box-shadow:2px 2px 0 var(--ink)}
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--head);font-weight:800;font-size:1.05rem;text-decoration:none;padding:10px 20px;border:var(--b);border-radius:999px;background:var(--c,var(--yellow));color:var(--ink);box-shadow:4px 4px 0 var(--ink);transition:transform .12s,box-shadow .12s}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+.wave{height:22px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='22' viewBox='0 0 60 22'%3E%3Cpath d='M0 11 Q15 0 30 11 T60 11' fill='none' stroke='%232B2D42' stroke-width='3' stroke-dasharray='0'/%3E%3C/svg%3E") repeat-x center;opacity:.9;margin:8px 0}
+
+/* polaroid */
+.pola{background:#fff;padding:10px 10px 14px;border:2.5px solid var(--ink);border-radius:6px;box-shadow:5px 5px 0 rgba(43,45,66,.85);position:relative}
+.pola::before{content:"";position:absolute;top:-12px;left:50%;width:76px;height:22px;transform:translateX(-50%) rotate(-3deg);background:rgba(255,210,63,.75);border:1.5px solid rgba(43,45,66,.25)}
+.pola img{width:100%;height:100%;object-fit:cover;border-radius:2px}
+
+/* ---------- hero ---------- */
+.hero{position:relative;display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(28px,5vw,60px);align-items:center;padding-top:clamp(36px,6vw,72px);padding-bottom:clamp(40px,6vw,72px)}
+.hero h1{font-family:var(--head);font-weight:800;font-size:clamp(2.4rem,5.6vw,4.1rem);line-height:1.02;margin:.2em 0 .35em;letter-spacing:-.01em}
+.hero .lead{font-size:clamp(1.05rem,1.6vw,1.18rem);color:var(--ink-2);max-width:54ch;margin:0}
+.hello{font-family:var(--hand);font-size:clamp(1.6rem,3vw,2.1rem);color:var(--red);transform:rotate(-2deg);display:inline-block}
+.stats{display:flex;gap:14px;margin-top:26px;flex-wrap:wrap}
+.stat{background:#fff;border:var(--b);border-radius:16px;padding:8px 16px;box-shadow:3px 3px 0 var(--c);min-width:92px}
+.stat b{display:block;font-family:var(--head);font-weight:800;font-size:1.9rem;line-height:1.1}
+.stat span{font-weight:700;font-size:.82rem;color:var(--ink-2)}
+.board{position:relative;height:clamp(340px,40vw,470px)}
+.board a{position:absolute;display:block;text-decoration:none;transition:transform .2s}
+.board a:hover{transform:rotate(0) scale(1.04)!important;z-index:5}
+.board .p1{left:2%;top:4%;width:52%;aspect-ratio:4/3.3;transform:rotate(-5deg)}
+.board .p2{right:0;top:0;width:44%;aspect-ratio:1;transform:rotate(4deg)}
+.board .p3{left:12%;bottom:0;width:44%;aspect-ratio:1/1;transform:rotate(3deg);z-index:2}
+.board .p4{right:4%;bottom:4%;width:42%;aspect-ratio:4/3.4;transform:rotate(-3deg)}
+.board .cap{position:absolute;left:0;right:0;bottom:-2px;text-align:center;font-family:var(--hand);font-size:1.15rem;font-weight:700;color:var(--ink)}
+.board .pola{height:100%;padding-bottom:30px}
+
+/* ---------- títulos de seção ---------- */
+.sec{padding:clamp(36px,6vw,64px) 0}
+.sec-title{font-family:var(--head);font-weight:800;font-size:clamp(1.8rem,3.6vw,2.6rem);line-height:1.1;margin:.1em 0 .2em}
+.sec-sub{color:var(--ink-2);margin:0 0 24px;max-width:70ch}
+
+/* ---------- eixos (home) ---------- */
+.cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:26px}
+.cat-card{display:flex;flex-direction:column;text-decoration:none;background:#fff;border:var(--b);border-radius:var(--r);box-shadow:6px 6px 0 var(--c);overflow:hidden;transition:transform .15s,box-shadow .15s}
+.cat-card:nth-child(odd){transform:rotate(-.6deg)}
+.cat-card:nth-child(even){transform:rotate(.6deg)}
+.cat-card:hover{transform:translate(-3px,-3px) rotate(0);box-shadow:10px 10px 0 var(--c)}
+.cat-top{background:var(--c);padding:18px 20px 16px;color:#fff;position:relative;border-bottom:var(--b);min-height:120px}
+.cat-top .num{font-family:var(--head);font-weight:800;font-size:3.4rem;line-height:.9;opacity:.35;position:absolute;right:16px;top:10px}
+.cat-top .big-ico{width:54px;height:54px;border-radius:16px;background:#fff;color:var(--c);display:grid;place-items:center;border:2.5px solid var(--ink);box-shadow:3px 3px 0 var(--ink);transform:rotate(-6deg)}
+.cat-top .big-ico svg{width:30px;height:30px}
+.cat-top .area{display:block;margin-top:12px;font-weight:800;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;opacity:.95}
+.cat-body{padding:16px 20px 20px;display:flex;flex-direction:column;gap:10px;flex:1}
+.cat-body h3{font-family:var(--head);font-weight:800;font-size:1.4rem;line-height:1.15;margin:0}
+.minis{display:flex;margin:4px 0 2px}
+.minis img{width:54px;height:54px;object-fit:cover;border-radius:12px;border:2.5px solid #fff;box-shadow:0 0 0 2px var(--ink);margin-right:-10px}
+.minis .plus{width:54px;height:54px;border-radius:12px;background:var(--yellow);box-shadow:0 0 0 2px var(--ink);border:2.5px solid #fff;display:grid;place-items:center;font-weight:800}
+.cat-body p{margin:0;color:var(--ink-2);font-size:.93rem}
+.cat-body .go{margin-top:auto;padding-top:6px;font-family:var(--hand);font-size:1.45rem;font-weight:700;color:var(--c);display:flex;align-items:center;gap:6px}
+
+/* ---------- busca ---------- */
+.search{position:relative;max-width:560px;margin:0 0 26px}
+.search input{width:100%;font:700 1rem var(--body);padding:13px 18px 13px 48px;border:var(--b);border-radius:999px;background:#fff;color:var(--ink);box-shadow:4px 4px 0 var(--ink)}
+.search svg{position:absolute;left:16px;top:50%;transform:translateY(-50%)}
+.note{font-family:var(--hand);font-size:1.3rem;color:var(--purple);margin:-12px 0 16px 8px;min-height:1px}
+
+/* ---------- princípios ---------- */
+.p-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.p-card{background:#fff;border:var(--b);border-radius:18px;padding:22px 20px;position:relative;box-shadow:5px 5px 0 var(--c)}
+.p-card::before{content:"";position:absolute;top:-11px;left:22px;width:60px;height:20px;background:var(--c);opacity:.55;transform:rotate(-4deg)}
+.p-card h3{font-family:var(--head);font-weight:800;font-size:1.22rem;margin:4px 0 6px;line-height:1.2}
+.p-card p{margin:0;font-size:.93rem;color:var(--ink-2)}
+.p-card .who{display:block;margin-top:10px;font-family:var(--hand);font-size:1.3rem;font-weight:700;color:var(--c)}
+
+/* ---------- página do eixo ---------- */
+.crumbs{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-weight:700;font-size:.9rem;padding-top:26px}
+.crumbs a{text-decoration:none;background:#fff;border:2px solid var(--ink);border-radius:999px;padding:2px 12px}
+.crumbs a:hover{background:var(--yellow)}
+.crumbs .here{color:var(--ink-2)}
+.cat-hero{margin:20px 0 34px;background:var(--c);color:#fff;border:var(--b);border-radius:28px;box-shadow:8px 8px 0 var(--ink);padding:clamp(22px,4vw,40px);display:grid;grid-template-columns:auto 1fr;gap:clamp(18px,3vw,32px);align-items:center;position:relative;overflow:hidden}
+.cat-hero .big-ico{width:clamp(76px,10vw,110px);height:clamp(76px,10vw,110px);border-radius:26px;background:#fff;color:var(--c);display:grid;place-items:center;border:var(--b);box-shadow:5px 5px 0 var(--ink);transform:rotate(-6deg)}
+.cat-hero .big-ico svg{width:55%;height:55%}
+.cat-hero h1{font-family:var(--head);font-weight:800;font-size:clamp(1.9rem,4.4vw,3.1rem);line-height:1.05;margin:.15em 0 .3em}
+.cat-hero p{margin:0;max-width:72ch;font-size:1.02rem;opacity:.96}
+.cat-hero .num{position:absolute;right:20px;bottom:-24px;font-family:var(--head);font-weight:800;font-size:clamp(7rem,14vw,11rem);line-height:1;opacity:.14}
+.cat-hero .sticker{background:#fff;color:var(--ink)}
+.act-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:30px 26px;padding-bottom:clamp(44px,6vw,72px)}
+.act-card{text-decoration:none;display:flex;flex-direction:column;transition:transform .18s}
+.act-card:nth-child(3n+1){transform:rotate(-1.2deg)}
+.act-card:nth-child(3n+2){transform:rotate(.9deg)}
+.act-card:nth-child(3n){transform:rotate(-.4deg)}
+.act-card:hover{transform:rotate(0) translateY(-4px)}
+.act-card .pola{padding-bottom:12px;display:flex;flex-direction:column;height:100%}
+.act-card .ph{aspect-ratio:4/3;position:relative;overflow:hidden;border-radius:2px;background:#eee}
+.act-card .ph img,.ph2 img{position:absolute;inset:0;width:100%;height:100%}.ph2{position:relative;display:block;height:100%;overflow:hidden;border-radius:2px;background:#eee}img.bg{object-fit:cover;filter:blur(12px) brightness(.85);transform:scale(1.2)}img.fg{object-fit:contain}
+.act-card .count{position:absolute;right:8px;bottom:8px;background:#fff;border:2px solid var(--ink);border-radius:999px;padding:1px 10px;font-weight:800;font-size:.8rem}
+.act-card .play{position:absolute;inset:0;display:grid;place-items:center}
+.act-card .play span{width:56px;height:56px;border-radius:50%;background:var(--yellow);border:2.5px solid var(--ink);display:grid;place-items:center}
+.act-card h3{font-family:var(--hand);font-weight:700;font-size:1.75rem;line-height:1.05;margin:12px 4px 4px;color:var(--ink)}
+.act-card p{margin:0 4px;font-size:.92rem;color:var(--ink-2)}
+.act-card .go{margin:12px 4px 0;align-self:flex-start;font-weight:800;font-size:.85rem;padding:4px 12px;border:2px solid var(--ink);border-radius:999px;background:var(--c);color:#fff;margin-top:auto}
+.act-card .txt{display:flex;flex-direction:column;gap:4px;flex:1;padding-bottom:2px}
+.act-card .txt .go{margin-top:auto}
+
+/* ---------- página da atividade ---------- */
+.act-head{margin:20px 0 30px;display:grid;grid-template-columns:1fr auto;gap:20px;align-items:end}
+.act-head h1{font-family:var(--head);font-weight:800;font-size:clamp(2.1rem,5vw,3.5rem);line-height:1.02;margin:.25em 0 .2em}
+.act-head .lead{margin:0;font-size:1.08rem;color:var(--ink-2);max-width:62ch}
+.act-head .counter{font-family:var(--hand);font-size:1.5rem;color:var(--c);transform:rotate(-3deg);text-align:right}
+.act-layout{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:clamp(24px,4vw,46px);align-items:start;padding-bottom:36px}
+.gallery{columns:2 260px;column-gap:24px;padding-top:14px}
+.gallery button{display:block;width:100%;margin:0 0 30px;padding:0;border:0;background:none;cursor:zoom-in;break-inside:avoid}
+.gallery .pola{padding-bottom:10px;transition:transform .18s}
+.gallery button:nth-child(4n+1) .pola{transform:rotate(-1.6deg)}
+.gallery button:nth-child(4n+2) .pola{transform:rotate(1.2deg)}
+.gallery button:nth-child(4n+3) .pola{transform:rotate(.6deg)}
+.gallery button:nth-child(4n) .pola{transform:rotate(-.8deg)}
+.gallery button:hover .pola{transform:rotate(0) scale(1.02)}
+.gallery .pola img{height:auto}
+.gallery .pola::before{background:color-mix(in srgb,var(--c) 55%,transparent)}
+.gallery.single{columns:1}
+.videos{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:24px;padding-top:14px}
+.videos .pola{padding-bottom:10px}
+.videos video{width:100%;display:block;background:#000;max-height:70vh;border-radius:2px}
+.videos figcaption{font-family:var(--hand);font-size:1.3rem;text-align:center;margin-top:6px}
+.videos figure{margin:0}
+.side{position:sticky;top:140px;display:grid;gap:18px}
+.note-card{background:#fff;border:var(--b);border-radius:16px;padding:18px 18px 18px 22px;position:relative;box-shadow:4px 4px 0 var(--ink)}
+.note-card.y{background:#FFF4C2}.note-card.g{background:#DDF7F3}.note-card.p{background:#F0E6FF}
+.note-card h4{margin:0 0 6px;font-family:var(--head);font-weight:800;font-size:1.05rem;display:flex;align-items:center;gap:8px}
+.note-card h4 i{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:var(--ink);color:#fff;font-style:normal;font-size:.9rem}
+.note-card p{margin:0;font-size:.95rem;color:#3D4058}
+.pager{display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:10px 0 clamp(44px,6vw,72px)}
+.pager a{display:block;text-decoration:none;background:#fff;border:var(--b);border-radius:18px;padding:14px 18px;box-shadow:4px 4px 0 var(--c);transition:transform .12s,box-shadow .12s}
+.pager a:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--c)}
+.pager small{display:block;font-weight:800;font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-2)}
+.pager span{font-family:var(--head);font-weight:800;font-size:1.15rem}
+.pager .next{text-align:right;grid-column:2}
+
+/* ---------- footer ---------- */
+footer{border-top:var(--b);background:var(--ink);color:#E6E7EE;padding:30px 0}
+footer .sig{font-family:var(--hand);font-size:2rem;color:var(--yellow);line-height:1}
+footer p{margin:6px 0 0;font-size:.9rem;opacity:.85}
+
+/* ---------- lightbox ---------- */
+.lb{position:fixed;inset:0;z-index:100;background:rgba(30,31,46,.95);display:none;flex-direction:column}
+.lb.open{display:flex}
+.lb-top{display:flex;align-items:center;gap:12px;padding:12px clamp(12px,3vw,24px);color:#fff}
+.lb-title{font-family:var(--head);font-size:1.15rem;font-weight:800;line-height:1.2}
+.lb-title small{display:block;font-family:var(--hand);font-weight:700;font-size:1.2rem;color:var(--yellow)}
+.lb-close{margin-left:auto}
+.lb-btn{width:46px;height:46px;border-radius:50%;border:2.5px solid #fff;background:transparent;color:#fff;display:grid;place-items:center;cursor:pointer;flex:none}
+.lb-btn:hover{background:var(--yellow);color:var(--ink);border-color:var(--yellow)}
+.lb-stage{flex:1;display:flex;align-items:center;justify-content:center;gap:12px;padding:0 clamp(8px,2vw,24px) 12px;min-height:0;touch-action:pan-y}
+.lb-media{flex:1;height:100%;display:flex;align-items:center;justify-content:center;min-width:0}
+.lb-media img,.lb-media video{max-width:100%;max-height:100%;border-radius:8px;border:6px solid #fff;object-fit:contain;background:#fff}
+.lb-strip{display:flex;gap:6px;overflow-x:auto;padding:0 16px 14px;justify-content:safe center}
+.lb-strip button{flex:none;width:54px;height:54px;border:3px solid transparent;border-radius:10px;overflow:hidden;padding:0;cursor:pointer;opacity:.5;background:#222}
+.lb-strip button[aria-current="true"]{border-color:var(--yellow);opacity:1}
+.lb-strip img{width:100%;height:100%;object-fit:cover}
+
+.view{animation:pop .3s ease}
+@keyframes pop{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+
+/* ---------- player de vídeo ---------- */
+.player-wrap{display:grid;grid-template-columns:minmax(0,330px) minmax(0,1fr);gap:clamp(20px,4vw,40px);align-items:start;padding-top:10px}
+.phone{background:var(--ink);border-radius:38px;padding:12px;box-shadow:8px 8px 0 var(--c);position:relative;max-width:330px;margin:0 auto;width:100%}
+.phone::before{content:"";position:absolute;top:20px;left:50%;transform:translateX(-50%);width:70px;height:16px;border-radius:99px;background:#1a1b29;z-index:3}
+.screen{position:relative;aspect-ratio:9/16;border-radius:28px;overflow:hidden;background:#000;cursor:pointer}
+.screen video{width:100%;height:100%;object-fit:cover;display:block}
+.bigplay{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:86px;height:86px;border-radius:50%;background:var(--yellow);border:3px solid var(--ink);box-shadow:4px 4px 0 var(--ink);display:grid;place-items:center;cursor:pointer;transition:transform .15s,opacity .2s;z-index:2}
+.bigplay:hover{transform:translate(-50%,-50%) scale(1.06)}
+.screen.playing .bigplay{opacity:0;pointer-events:none}
+.vlabel{position:absolute;top:44px;left:14px;background:var(--c);color:#fff;font-weight:800;font-size:.8rem;padding:3px 10px;border-radius:99px;border:2px solid #fff;z-index:2}
+.ctrl{position:absolute;left:0;right:0;bottom:0;padding:34px 14px 14px;background:linear-gradient(transparent,rgba(0,0,0,.75));display:flex;flex-direction:column;gap:8px;z-index:2;transition:opacity .25s}
+.screen.playing.idle .ctrl{opacity:0}
+.prog{position:relative;height:8px;border-radius:99px;background:rgba(255,255,255,.3)}
+.prog .fill{position:absolute;left:0;top:0;bottom:0;border-radius:99px;background:var(--yellow);width:0}
+.prog input{position:absolute;inset:-8px 0;width:100%;opacity:0;cursor:pointer;margin:0}
+.prog .knob{position:absolute;top:50%;width:18px;height:18px;border-radius:50%;background:#fff;border:3px solid var(--ink);transform:translate(-50%,-50%);left:0;pointer-events:none}
+.crow{display:flex;align-items:center;gap:8px;color:#fff;font-weight:800;font-size:.85rem}
+.cbtn{width:38px;height:38px;border-radius:50%;border:2px solid #fff;background:rgba(255,255,255,.12);color:#fff;display:grid;place-items:center;cursor:pointer;flex:none;font:800 .8rem var(--body)}
+.cbtn:hover{background:var(--yellow);color:var(--ink);border-color:var(--yellow)}
+.cbtn.speed{width:auto;padding:0 10px;border-radius:99px}
+.crow .time{margin-right:auto;font-variant-numeric:tabular-nums;white-space:nowrap;font-size:.8rem}
+@media (max-width:420px){.cbtn{width:32px;height:32px}.crow{gap:6px}}
+.plist{display:grid;gap:14px}
+.plist h3{font-family:var(--head);font-weight:800;font-size:1.4rem;margin:0}
+.plist .hint{margin:0 0 4px;color:var(--ink-2)}
+.pitem{display:flex;align-items:center;gap:14px;text-align:left;width:100%;background:#fff;border:var(--b);border-radius:18px;padding:10px;cursor:pointer;box-shadow:4px 4px 0 var(--ink);transition:transform .12s,box-shadow .12s;font:inherit;color:inherit}
+.pitem:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+.pitem[aria-current="true"]{background:#FFF4C2;box-shadow:6px 6px 0 var(--c)}
+.pitem .th{position:relative;width:56px;height:96px;border-radius:10px;overflow:hidden;flex:none;border:2px solid var(--ink)}
+.pitem .th img{width:100%;height:100%;object-fit:cover}
+.pitem .th span{position:absolute;inset:0;display:grid;place-items:center;background:rgba(0,0,0,.25)}
+.pitem b{display:block;font-family:var(--head);font-weight:800;font-size:1.2rem;line-height:1.1}
+.pitem small{color:var(--ink-2);font-weight:700}
+.pitem .now{display:none;margin-top:6px;font-size:.75rem;font-weight:800;background:var(--c);color:#fff;padding:2px 9px;border-radius:99px;width:max-content}
+.pitem[aria-current="true"] .now{display:block}
+.eq{display:inline-flex;gap:2px;align-items:flex-end;height:12px;margin-left:6px;vertical-align:-1px}
+.eq i{width:3px;background:#fff;animation:eq .8s infinite ease-in-out}
+.eq i:nth-child(2){animation-delay:.2s}.eq i:nth-child(3){animation-delay:.4s}
+@keyframes eq{0%,100%{height:3px}50%{height:12px}}
+.paused .eq i{animation:none;height:4px}
+
+/* ---------- vídeo do projeto ---------- */
+.hvid{position:relative;border:var(--b);border-radius:26px;overflow:hidden;box-shadow:8px 8px 0 var(--blue);background:#000;aspect-ratio:16/9;max-width:980px}
+.hvid video{width:100%;height:100%;display:block;object-fit:contain;background:#000}
+.hbig{position:absolute;inset:0;margin:auto;width:110px;height:110px;border-radius:50%;background:var(--yellow);border:3px solid var(--ink);box-shadow:5px 5px 0 var(--ink);display:grid;place-items:center;cursor:pointer;transition:transform .15s,opacity .2s}
+.hbig:hover{transform:scale(1.06)}
+.hvid.playing .hbig{opacity:0;pointer-events:none}
+.hvid .tag2{position:absolute;left:16px;top:16px;background:var(--red);color:#fff;font-weight:800;font-size:.85rem;padding:4px 12px;border-radius:99px;border:2px solid #fff;transition:opacity .2s}
+.hvid.playing .tag2{opacity:0}
+@media (max-width:720px){.hbig{width:76px;height:76px}.hvid{border-radius:18px;box-shadow:5px 5px 0 var(--blue)}}
+/* ---------- área da professora ---------- */
+.loginbtn{margin-left:8px;display:flex;align-items:center;gap:6px;font:800 .88rem var(--body);padding:6px 14px 6px 10px;border:2.5px solid var(--ink);border-radius:999px;background:#fff;color:var(--ink);cursor:pointer;box-shadow:2px 2px 0 var(--ink)}
+.loginbtn:hover{background:var(--yellow)}
+.loginbtn.on{background:var(--green);color:#fff}
+.editbar{display:none;position:sticky;top:0;z-index:35;background:var(--ink);color:#fff;font-weight:700;font-size:.9rem}
+body.editing .editbar{display:block}
+.editbar .wrap{display:flex;align-items:center;gap:10px;min-height:44px;flex-wrap:wrap;padding-top:6px;padding-bottom:6px}
+.editbar .warn{color:var(--yellow);font-weight:700;font-size:.85rem}
+.editbar button{font:800 .82rem var(--body);border:2px solid #fff;background:transparent;color:#fff;border-radius:99px;padding:4px 12px;cursor:pointer}
+.editbar button.prim{background:var(--yellow);color:var(--ink);border-color:var(--yellow)}
+.editbar .sp{margin-left:auto}
+.edtools{display:flex;gap:10px;flex-wrap:wrap;margin:6px 0 0}
+.ebtn{display:inline-flex;align-items:center;gap:6px;font:800 .9rem var(--body);padding:8px 16px;border:2.5px solid var(--ink);border-radius:999px;background:var(--yellow);color:var(--ink);cursor:pointer;box-shadow:3px 3px 0 var(--ink);text-decoration:none}
+.ebtn.ghost{background:#fff}.ebtn.danger{background:#fff;color:#C62828;border-color:#C62828;box-shadow:3px 3px 0 #C62828}
+.ebtn:disabled{opacity:.5;cursor:not-allowed}
+.newcard{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;min-height:260px;border:3px dashed var(--ink);border-radius:18px;background:rgba(255,255,255,.7);font-family:var(--head);font-weight:800;font-size:1.2rem;cursor:pointer;color:var(--ink)}
+.newcard span{width:56px;height:56px;border-radius:50%;background:var(--yellow);border:3px solid var(--ink);display:grid;place-items:center;font-size:2rem;line-height:1}
+.ph.empty{display:grid;place-items:center;background:color-mix(in srgb,var(--c) 20%,#fff);color:var(--c)}
+.ph.empty svg{width:48px;height:48px}
+.modal{position:fixed;inset:0;z-index:120;background:rgba(30,31,46,.6);display:none;align-items:center;justify-content:center;padding:16px}
+.modal.open{display:flex}
+.mbox{background:var(--paper);border:3px solid var(--ink);border-radius:24px;box-shadow:8px 8px 0 var(--ink);width:100%;max-width:420px;padding:22px;max-height:92vh;overflow:auto}
+.mbox.wide{max-width:720px}
+.mbox h2{font-family:var(--head);font-weight:800;font-size:1.5rem;margin:0 0 4px}
+.mbox .sub{color:var(--ink-2);margin:0 0 16px;font-size:.92rem}
+.fld{display:block;margin:0 0 14px;font-weight:800;font-size:.9rem}
+.fld input,.fld select,.fld textarea{display:block;width:100%;margin-top:6px;font:600 1rem var(--body);color:var(--ink);padding:10px 12px;border:2.5px solid var(--ink);border-radius:12px;background:#fff}
+.fld textarea{resize:vertical;min-height:84px;line-height:1.45}
+.mact{display:flex;gap:10px;justify-content:flex-end;margin-top:10px;flex-wrap:wrap}
+.merr{color:#C62828;font-weight:700;font-size:.9rem;min-height:1.2em;margin:4px 0}
+.mok{color:var(--green);font-weight:700}
+.medgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:10px;margin:8px 0 10px}
+.medit{position:relative;aspect-ratio:1;border:2.5px solid var(--ink);border-radius:12px;overflow:hidden;background:#eee}
+.medit img{width:100%;height:100%;object-fit:cover}
+.medit .vt{position:absolute;left:4px;bottom:4px;background:var(--ink);color:#fff;font-size:.65rem;font-weight:800;padding:1px 6px;border-radius:99px}
+.medit .cv{position:absolute;left:4px;top:4px;background:var(--yellow);font-size:.65rem;font-weight:800;padding:1px 6px;border-radius:99px;border:1.5px solid var(--ink)}
+.medit .mb{position:absolute;top:4px;right:4px;display:flex;flex-direction:column;gap:4px}
+.medit .mb button{width:26px;height:26px;border-radius:50%;border:2px solid var(--ink);background:#fff;font-weight:900;cursor:pointer;display:grid;place-items:center;font-size:.8rem;line-height:1}
+.upl{display:flex;align-items:center;justify-content:center;gap:8px;border:2.5px dashed var(--ink);border-radius:14px;padding:14px;font-weight:800;cursor:pointer;background:#fff}
+.upl input{position:absolute;left:-9999px}
+.upl.off{opacity:.5;cursor:not-allowed}
+.uplog{font-size:.85rem;color:var(--ink-2);margin:6px 0}
+@media (max-width:720px){
+  .loginbtn{margin-left:auto;padding:6px 10px}
+  .loginbtn .lt{display:none}
+  body.sub .loginbtn{margin-left:auto}
+  .mbox{padding:18px;border-radius:20px}
+  .modal{align-items:flex-end;padding:0}
+  .mbox,.mbox.wide{max-width:none;border-radius:22px 22px 0 0;max-height:94vh;box-shadow:none;border-bottom:0;padding-bottom:calc(18px + env(safe-area-inset-bottom))}
+}
+
+/* ---------- app (mobile) ---------- */
+.back,.apptitle{display:none}
+.tabbar,.sheet{display:none}
+
+@media (max-width:960px){
+  .hero{grid-template-columns:1fr}
+  .p-grid{grid-template-columns:repeat(2,1fr)}
+  .act-layout{grid-template-columns:1fr}.side{position:static;order:-1}
+}
+@media (max-width:720px){
+  html{-webkit-tap-highlight-color:transparent}
+  body{padding-bottom:calc(76px + env(safe-area-inset-bottom));background-size:22px 22px}
+  header.top{border-bottom-width:2px}
+  .top-row{height:58px;gap:10px}
+  .chips,.top-links{display:none}
+  body.sub .brand{display:none}
+  body.sub .back{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;border:2.5px solid var(--ink);background:var(--yellow);text-decoration:none;flex:none;box-shadow:2px 2px 0 var(--ink)}
+  body.sub .apptitle{display:block;font-family:var(--head);font-weight:800;font-size:1.12rem;line-height:1.1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .crumbs{display:none}
+  .tabbar{display:grid;grid-template-columns:repeat(4,1fr);position:fixed;left:0;right:0;bottom:0;z-index:60;background:#fff;border-top:2.5px solid var(--ink);padding:6px 6px calc(6px + env(safe-area-inset-bottom))}
+  .tabbar a,.tabbar button{display:flex;flex-direction:column;align-items:center;gap:2px;text-decoration:none;background:none;border:0;font:800 .7rem var(--body);color:var(--ink-2);padding:4px 0;cursor:pointer;border-radius:14px}
+  .tabbar svg{width:24px;height:24px}
+  .tabbar .on{color:var(--ink)}
+  .tabbar .on .tic{background:var(--yellow);border:2px solid var(--ink)}
+  .tic{width:46px;height:30px;border-radius:99px;display:grid;place-items:center;border:2px solid transparent}
+  .sheet{display:block;position:fixed;inset:0;z-index:90;background:rgba(30,31,46,.5);opacity:0;pointer-events:none;transition:opacity .2s}
+  .sheet.open{opacity:1;pointer-events:auto}
+  .sheet-panel{position:absolute;left:0;right:0;bottom:0;background:var(--paper);border-top:3px solid var(--ink);border-radius:26px 26px 0 0;padding:10px 16px calc(20px + env(safe-area-inset-bottom));transform:translateY(100%);transition:transform .25s ease;max-height:82vh;overflow:auto}
+  .sheet.open .sheet-panel{transform:none}
+  .grab{width:48px;height:5px;border-radius:99px;background:#C7CAD6;margin:2px auto 12px}
+  .sheet h3{font-family:var(--head);font-weight:800;font-size:1.3rem;margin:0 0 10px}
+  .srow{display:flex;align-items:center;gap:12px;text-decoration:none;padding:10px;border:2.5px solid var(--ink);border-radius:16px;background:#fff;margin-bottom:10px;box-shadow:3px 3px 0 var(--c)}
+  .srow .si{width:40px;height:40px;border-radius:12px;background:var(--c);color:#fff;display:grid;place-items:center;flex:none}
+  .srow .si svg{width:22px;height:22px}
+  .srow b{font-weight:800;line-height:1.2;display:block}
+  .srow small{color:var(--ink-2);font-weight:700}
+  .srow .chev{margin-left:auto;font-weight:900;color:var(--c)}
+  footer{padding:22px 0}
+  /* home */
+  .hero{padding-top:20px;padding-bottom:28px;gap:22px}
+  .hero h1{font-size:2.15rem}
+  .hello{font-size:1.45rem}
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+  .stat{min-width:0;padding:6px 8px;border-radius:12px}
+  .stat b{font-size:1.35rem}.stat span{font-size:.7rem}
+  .board{height:300px}
+  .sec{padding:26px 0}
+  .sec-title{font-size:1.6rem}
+  .cat-grid{grid-template-columns:1fr;gap:14px}
+  .cat-card,.cat-card:nth-child(odd),.cat-card:nth-child(even){flex-direction:row;transform:none;box-shadow:4px 4px 0 var(--c);border-radius:18px}
+  .cat-top{min-height:0;width:78px;flex:none;display:grid;place-items:center;padding:10px;border-bottom:0;border-right:3px solid var(--ink)}
+  .cat-top .num,.cat-top .area{display:none}
+  .cat-top .big-ico{width:46px;height:46px;border-radius:14px}
+  .cat-top .big-ico svg{width:24px;height:24px}
+  .cat-body{padding:12px 14px;gap:4px;justify-content:center}
+  .cat-body h3{font-size:1.08rem}
+  .minis{display:none}
+  .cat-body p{font-size:.8rem;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .cat-body .go{display:none}
+  .p-grid{gap:16px}
+  /* eixo */
+  .cat-hero{margin:16px 0 22px;grid-template-columns:1fr;gap:12px;padding:18px;border-radius:22px;box-shadow:5px 5px 0 var(--ink)}
+  .cat-hero .big-ico{width:56px;height:56px;border-radius:16px}
+  .cat-hero h1{font-size:1.45rem;margin:.25em 0}
+  .cat-hero p{font-size:.9rem}
+  .cat-hero .sticker{font-size:.68rem}
+  .act-grid{grid-template-columns:1fr 1fr;gap:18px 12px}
+  .act-card,.act-card:nth-child(3n+1),.act-card:nth-child(3n+2),.act-card:nth-child(3n){transform:none}
+  .act-card .pola{padding:6px 6px 10px;box-shadow:3px 3px 0 rgba(43,45,66,.85)}
+  .act-card .pola::before{width:48px;height:16px;top:-9px}
+  .act-card h3{font-size:1.25rem;margin:8px 2px 2px}
+  .act-card p{font-size:.78rem;margin:0 2px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+  .act-card .count{font-size:.68rem;padding:0 7px;right:5px;bottom:5px}
+  .act-card .go{display:none}
+  /* atividade */
+  .act-head{margin:16px 0 14px;gap:6px}
+  .act-head h1{font-size:1.9rem}
+  .act-head .lead{font-size:.98rem}
+  .act-head .counter{font-size:1.2rem;transform:none}
+  .act-layout{gap:18px;padding-bottom:22px}
+  .side{order:2}
+  .gallery{columns:2;column-gap:12px}
+  .gallery button{margin-bottom:14px}
+  .gallery .pola{padding:5px 5px 7px;box-shadow:3px 3px 0 rgba(43,45,66,.85)}
+  .gallery .pola::before{width:42px;height:14px;top:-8px}
+  .gallery.single{columns:1}
+  .player-wrap{grid-template-columns:1fr;gap:20px}
+  .phone{max-width:290px}
+  .plist h3{font-size:1.2rem}
+  .pager{gap:10px}
+  .pager span{font-size:1rem}
+}
+@media (max-width:640px){
+  .top-links{display:none}
+  .p-grid{grid-template-columns:1fr}
+  .cat-grid{grid-template-columns:1fr}
+  .act-head{grid-template-columns:1fr}.act-head .counter{text-align:left}
+  .pager{grid-template-columns:1fr}.pager .next{grid-column:1}
+  .lb-stage .lb-btn{display:none}
+  .board{height:330px}
+  .doodle.hide-sm{display:none}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<a class="skip" href="#app">Pular para o conteúdo</a>
+<header class="top">
+  <div class="wrap">
+    <div class="top-row">
+      <a class="back" id="back" href="#inicio" aria-label="Voltar"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></a><span class="apptitle" id="apptitle"></span>
+      <a class="brand" href="#inicio">
+        <svg class="logo" viewBox="0 0 48 48" aria-hidden="true"><rect x="3" y="3" width="42" height="42" rx="12" fill="#FFD23F" stroke="#2B2D42" stroke-width="3"/><path d="M14 33l14-20 6 4-14 20-7 2z" fill="#FF5A5F" stroke="#2B2D42" stroke-width="2.5" stroke-linejoin="round"/><path d="M28 13l6 4" stroke="#2B2D42" stroke-width="2.5"/></svg>
+        <span>Projeto de Apoio Pedagógico<small>Profª Claudia Cabral</small></span></a>
+      <nav class="top-links" aria-label="Seções"><a href="#inicio" data-nav="inicio">Início</a><a href="#principios" data-nav="principios">Como eu ensino</a></nav>
+      <button type="button" class="loginbtn" id="loginBtn" aria-label="Área da professora"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><span class="lt" id="loginTxt">Área da professora</span></button>
+    </div>
+    <nav class="chips" id="chips" aria-label="Eixos de aprendizagem"></nav>
+  </div>
+</header>
+
+<div class="editbar" id="editbar"><div class="wrap"><span>✏️ Modo edição</span><span class="warn" id="editwarn"></span><span class="sp"></span><button type="button" class="prim" id="ebNew">+ Nova atividade</button><button type="button" id="ebOut">Sair</button></div></div>
+<main id="app" tabindex="-1"></main>
+<nav class="tabbar" aria-label="Navegação">
+  <a href="#inicio" data-tab="inicio"><span class="tic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></svg></span>Início</a>
+  <button type="button" data-tab="eixos" id="tabEixos"><span class="tic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></svg></span>Eixos</button>
+  <button type="button" data-tab="buscar" id="tabBusca"><span class="tic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></span>Buscar</button>
+  <a href="#principios" data-tab="principios"><span class="tic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.6 5.6 6.1.6-4.6 4.1 1.3 6L12 16.3 6.6 19.3l1.3-6L3.3 9.2l6.1-.6z"/></svg></span>Como ensino</a>
+</nav>
+<div class="sheet" id="sheet" aria-hidden="true"><div class="sheet-panel" role="dialog" aria-label="Eixos de aprendizagem"><div class="grab"></div><h3>Eixos de aprendizagem</h3><div id="sheetlist"></div></div></div>
+
+<footer><div class="wrap"><div class="sig">Profª Claudia Cabral</div><p>Projeto de Apoio Pedagógico · registros de sala de aula organizados por eixo de aprendizagem. Imagens de uso pedagógico.</p></div></footer>
+
+<div class="modal" id="mLogin" role="dialog" aria-modal="true" aria-labelledby="mLoginT"><form class="mbox" id="fLogin" autocomplete="off">
+  <h2 id="mLoginT">Área da professora</h2><p class="sub">Entre para adicionar e editar atividades do portfólio.</p>
+  <label class="fld">Usuário<input name="u" autocomplete="username" required></label>
+  <label class="fld">Senha<input name="p" type="password" autocomplete="current-password" required></label>
+  <div class="merr" id="loginErr" aria-live="polite"></div>
+  <div class="mact"><button type="button" class="ebtn ghost" data-close>Cancelar</button><button type="submit" class="ebtn">Entrar</button></div>
+</form></div>
+<div class="modal" id="mEdit" role="dialog" aria-modal="true" aria-labelledby="mEditT"><form class="mbox wide" id="fEdit" autocomplete="off">
+  <h2 id="mEditT">Editar atividade</h2><p class="sub">As mudanças aparecem no portfólio assim que você salvar.</p>
+  <label class="fld">Título da atividade<input name="title" maxlength="120" required></label>
+  <label class="fld">Eixo<select name="cat" id="edCat"></select></label>
+  <label class="fld">O que eu propus<textarea name="desc" maxlength="2000" rows="3"></textarea></label>
+  <label class="fld">Meu objetivo<textarea name="obj" maxlength="2000" rows="3"></textarea></label>
+  <label class="fld">Por que escolhi<textarea name="base" maxlength="2000" rows="3"></textarea></label>
+  <div class="fld">Fotos e vídeos <small style="font-weight:600;color:var(--ink-2)">(a primeira é a capa)</small><div class="medgrid" id="edMedia"></div>
+    <label class="upl" id="edUpl"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg><span id="edUplT">Adicionar fotos e vídeos</span><input type="file" id="edFile" accept="image/*,video/*" multiple></label>
+    <div class="uplog" id="edLog" aria-live="polite"></div></div>
+  <div class="merr" id="edErr" aria-live="polite"></div>
+  <div class="mact"><button type="button" class="ebtn danger" id="edDel">Excluir atividade</button><span style="flex:1"></span><button type="button" class="ebtn ghost" data-close>Cancelar</button><button type="submit" class="ebtn" id="edSave">Salvar</button></div>
+</form></div>
+<div class="modal" id="mConf" role="dialog" aria-modal="true" aria-labelledby="mConfT"><div class="mbox">
+  <h2 id="mConfT">Excluir atividade?</h2><p class="sub" id="mConfTx"></p>
+  <div class="mact"><button type="button" class="ebtn ghost" data-close>Cancelar</button><button type="button" class="ebtn danger" id="confYes">Excluir</button></div>
+</div></div>
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-labelledby="lbt">
+  <div class="lb-top"><div class="lb-title" id="lbt"></div>
+    <button class="lb-btn lb-close" id="lbx" aria-label="Fechar"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+  <div class="lb-stage" id="lbs">
+    <button class="lb-btn" id="lbp" aria-label="Anterior"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M15 6l-6 6 6 6"/></svg></button>
+    <div class="lb-media" id="lbm"></div>
+    <button class="lb-btn" id="lbn" aria-label="Próxima"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></button>
+  </div>
+  <div class="lb-strip" id="lbstrip"></div>
+</div>
+
+<script id="data" type="application/json">[{"id": "alfabetizacao", "n": "01", "area": "Língua Portuguesa", "title": "Alfabetização e Consciência Fonológica", "color": "#E2574C", "intro": "Nestas atividades, levo os estudantes a refletir sobre o sistema de escrita: o que a escrita representa e como representa. Quando eles manipulam letras, sílabas e figuras, a análise da palavra fica visível e pode ser discutida entre colegas, sempre ligada ao uso real da escrita.", "acts": [{"id": "letras-moveis", "cat": "alfabetizacao", "title": "Usando Letras Móveis", "fdesc": "formação de palavras com alfabeto móvel a partir de figuras", "desc": "Com o alfabeto móvel, meus alunos montaram palavras a partir de fichas ilustradas, conferiram a escrita e registraram no caderno.", "obj": "Refletir sobre a relação entre sons e letras, a quantidade e a ordem das letras na palavra, sem a sobrecarga do traçado.", "base": "A escrita é construída por hipóteses que o aluno testa. O alfabeto móvel torna essas hipóteses visíveis e fáceis de revisar, sem a dificuldade do traçado.", "media": [{"t": "i", "src": "img/letras-moveis-01.jpg", "w": 1280, "h": 960}, {"t": "i", "src": "img/letras-moveis-02.jpg", "w": 1280, "h": 660}, {"t": "i", "src": "img/letras-moveis-03.jpg", "w": 1280, "h": 960}, {"t": "i", "src": "img/letras-moveis-04.jpg", "w": 960, "h": 1280}, {"t": "i", "src": "img/letras-moveis-05.jpg", "w": 1280, "h": 960}, {"t": "i", "src": "img/letras-moveis-06.jpg", "w": 1280, "h": 960}, {"t": "i", "src": "img/letras-moveis-07.jpg", "w": 1280, "h": 960}, {"t": "i", "src": "img/letras-moveis-08.jpg", "w": 1280, "h": 960}, {"t": "i", "src": "img/letras-moveis-09.jpg", "w": 1280, "h": 960}, {"t": "i", "src": "img/letras-moveis-10.jpg", "w": 1280, "h": 960}, {"t": "i", "src": "img/letras-moveis-11.jpg", "w": 1280, "h": 960}, {"t": "i", "src": "img/letras-moveis-12.jpg", "w": 1280, "h": 960}, {"t": "i", "src": "img/letras-moveis-13.jpg", "w": 1280, "h": 960}]}, {"id": "articulando", "cat": "alfabetizacao", "title": "Articulando as Palavras", "fdesc": "segmentação silábica e pronúncia com fichas ilustradas", "desc": "Em grupo, os alunos nomearam figuras em voz alta, separaram as palavras em sílabas e registraram as descobertas.", "obj": "Desenvolver consciência fonológica (sílaba e fonema) e clareza na articulação oral das palavras.", "base": "A consciência de que as palavras são formadas por sílabas e sons é uma das bases da alfabetização e se desenvolve junto com a escrita.", "media": [{"t": "i", "src": "img/articulando-01.jpg", "w": 960, "h": 1280}, {"t": "i", "src": "img/articulando-02.jpg", "w": 960, "h": 1280}]}, {"id": "associando", "cat": "alfabetizacao", "title": "Associando Palavras a Figuras", "fdesc": "jogo de cartelas para associar imagens e nomes", "desc": "Propus um jogo de cartelas em que cada figura devia ser associada à palavra escrita correspondente.", "obj": "Ler palavras com autonomia, ampliar o vocabulário e consolidar a correspondência entre palavra escrita e significado.", "base": "As regras do jogo dão um objetivo para a leitura, e a conferência entre colegas gera ajuda mútua.", "media": [{"t": "i", "src": "img/associando-01.jpg", "w": 960, "h": 1280}, {"t": "i", "src": "img/associando-02.jpg", "w": 1280, "h": 960}]}, {"id": "rima", "cat": "alfabetizacao", "title": "Jogo de Rima", "fdesc": "pareamento de figuras cujos nomes rimam", "desc": "Os alunos procuraram pares de figuras cujos nomes terminam com o mesmo som e registraram as rimas encontradas.", "obj": "Perceber semelhanças sonoras no final das palavras, habilidade de consciência fonológica ligada à leitura e à escrita.", "base": "Perceber rimas é um dos primeiros passos da consciência fonológica, que sustenta a leitura e a escrita.", "media": [{"t": "i", "src": "img/rima-01.jpg", "w": 960, "h": 1280}]}, {"id": "alfabeto", "cat": "alfabetizacao", "title": "Alfabeto Ilustrado", "fdesc": "consulta ao alfabeto ilustrado e registro de palavras", "desc": "Com um alfabeto ilustrado como apoio, meus alunos identificaram letras iniciais e escreveram palavras de referência.", "obj": "Conhecer o nome, a forma e a ordem das letras e usar palavras estáveis como apoio para novas escritas.", "base": "Conhecer as letras e ter palavras de referência dá ao aluno autonomia para escrever palavras novas.", "media": [{"t": "i", "src": "img/alfabeto-01.jpg", "w": 960, "h": 1280}, {"t": "i", "src": "img/alfabeto-02.jpg", "w": 960, "h": 1280}]}, {"id": "forme-palavras", "cat": "alfabetizacao", "title": "Forme Palavras", "fdesc": "composição de palavras a partir de sílabas e escrita de frases", "desc": "A partir de um quadro de sílabas, os alunos formaram palavras e depois as usaram em frases próprias.", "obj": "Compor palavras por combinação silábica e avançar da palavra isolada para a frase com sentido.", "base": "A palavra ganha sentido quando é usada numa frase com função comunicativa, e não só escrita isolada.", "media": [{"t": "i", "src": "img/forme-palavras-01.jpg", "w": 1280, "h": 960}]}, {"id": "descobrindo", "cat": "alfabetizacao", "title": "Descobrindo as Palavras", "fdesc": "escrita espontânea a partir de cartela ilustrada", "desc": "Pedi que cada aluno escrevesse, do jeito que sabia, os nomes das figuras de uma cartela. Depois comparamos a escrita com o modelo.", "obj": "Diagnosticar a hipótese de escrita e promover a autocorreção a partir da comparação.", "base": "A escrita espontânea me mostra como cada aluno pensa a escrita e orienta a minha próxima intervenção.", "media": [{"t": "i", "src": "img/descobrindo-01.jpg", "w": 1280, "h": 960}]}]}, {"id": "ortografia", "n": "02", "area": "Língua Portuguesa", "title": "Ortografia e Escrita", "color": "#F08A24", "intro": "Trato a ortografia como objeto de reflexão, e não de memorização. Meus alunos investigam as regras e as exceções, explicam as regras em voz alta e revisam a própria escrita e a dos colegas.", "acts": [{"id": "ortografia", "cat": "ortografia", "title": "Treinando Ortografia", "fdesc": "correção coletiva de palavras na lousa com fichas", "desc": "Levei fichas com palavras escritas de forma errada. Os alunos foram à lousa, reescreveram a forma correta e explicaram a regra para a turma.", "obj": "Compreender regularidades ortográficas (por exemplo, C/Ç, L/R, M antes de P e B) e explicitar a regra que as justifica.", "base": "Ensinar ortografia é levar o aluno a refletir sobre a regra, separando o que é regular do que precisa ser memorizado.", "media": [{"t": "i", "src": "img/ortografia-01.jpg", "w": 960, "h": 1280}, {"t": "i", "src": "img/ortografia-02.jpg", "w": 960, "h": 1280}, {"t": "i", "src": "img/ortografia-03.jpg", "w": 1280, "h": 960}, {"t": "i", "src": "img/ortografia-04.jpg", "w": 960, "h": 1280}, {"t": "i", "src": "img/ortografia-05.jpg", "w": 1280, "h": 960}, {"t": "i", "src": "img/ortografia-06.jpg", "w": 1280, "h": 960}, {"t": "i", "src": "img/ortografia-07.jpg", "w": 960, "h": 1280}]}, {"id": "ache-erro", "cat": "ortografia", "title": "Ache o Erro", "fdesc": "revisão de frases com desvios ortográficos usando cartas", "desc": "Distribuí cartas com frases que tinham erros de ortografia. Em grupo, os alunos localizaram o erro, reescreveram a frase e ilustraram no caderno.", "obj": "Desenvolver atitude revisora e atenção à forma escrita das palavras.", "base": "Revisar faz parte de escrever. Aqui o erro é tratado como informação para aprender, não como motivo de punição.", "media": [{"t": "i", "src": "img/ache-erro-01.jpg", "w": 960, "h": 1280}, {"t": "i", "src": "img/ache-erro-02.jpg", "w": 1280, "h": 960}]}, {"id": "caligrafia", "cat": "ortografia", "title": "Caligrafia", "fdesc": "escrita do nome completo em letra cursiva e de imprensa", "desc": "Trabalhei a escrita do nome completo em diferentes tipos de letra: cursiva, imprensa maiúscula e minúscula.", "obj": "Aprimorar o traçado, a legibilidade e o uso de maiúsculas, partindo do próprio nome.", "base": "O próprio nome é o primeiro texto que o aluno conhece de cor e serve de referência para escrever outras palavras.", "media": [{"t": "i", "src": "img/caligrafia-01.jpg", "w": 960, "h": 1280}]}]}, {"id": "leitura", "n": "03", "area": "Língua Portuguesa", "title": "Leitura, Interpretação e Produção de Textos", "color": "#2F7F6F", "intro": "Aqui o texto é o centro: leitura compartilhada e autônoma, inferência, oralidade e produção escrita com reescrita, como orienta a BNCC. Trabalho estratégias para antes, durante e depois da leitura e trago livros, quadrinhos, charges e poemas para explorar diferentes linguagens.", "acts": [{"id": "leitura", "cat": "leitura", "title": "Leitura e Interpretação", "fdesc": "leitura compartilhada de livros ilustrados e livros digitais", "desc": "Organizei leituras em dupla de livros ilustrados, como “É o Lobo?”, e de livros digitais no tablet, sempre com conversa sobre o enredo.", "obj": "Ler com fluência e compreensão, levantar hipóteses a partir de título e imagens e verificá-las durante a leitura.", "base": "Antecipar, conferir e recapitular são estratégias de leitura que precisam ser ensinadas de forma explícita.", "media": [{"t": "i", "src": "img/leitura-01.jpg", "w": 960, "h": 1280}, {"t": "i", "src": "img/leitura-02.jpg", "w": 960, "h": 1280}, {"t": "i", "src": "img/leitura-03.jpg", "w": 960, "h": 1280}, {"t": "i", "src": "img/leitura-04.jpg", "w": 960, "h": 1280}, {"t": "i", "src": "img/leitura-05.jpg", "w": 960, "h": 1280}, {"t": "i", "src": "img/leitura-06.jpg", "w": 960, "h": 1280}]}, {"id": "leitura-voz", "cat": "leitura", "title": "Leitura em Voz Alta", "fdesc": "registro em vídeo da fluência leitora", "video": true, "desc": "Gravei a leitura em voz alta dos alunos para acompanhar a evolução da fluência de cada um.", "obj": "Avaliar precisão, ritmo e entonação da leitura e dar devolutivas individuais.", "base": "O registro em vídeo me permite comparar a leitura ao longo do tempo e mostrar ao aluno a própria evolução.", "media": [{"t": "v", "src": "vid/leitura-voz-01.mp4", "poster": "img/leitura-voz-01-poster.jpg", "w": 480, "h": 864, "dur": 57.481}, {"t": "v", "src": "vid/leitura-voz-02.mp4", "poster": "img/leitura-voz-02-poster.jpg", "w": 480, "h": 864, "dur": 23.748}, {"t": "v", "src": "vid/leitura-voz-03.mp4", "poster": "img/leitura-voz-03-poster.jpg", "w": 480, "h": 864, "dur": 18.7}]}, {"id": "contando", "cat": "leitura", "title": "Contando Histórias", "fdesc": "roda de leitura e reconto oral", "desc": "Fizemos rodas em que a turma ouviu, leu e recontou histórias, valorizando a narrativa oral.", "obj": "Desenvolver escuta atenta, sequência narrativa e expressão oral.", "base": "Ler para e com os alunos amplia o repertório, desenvolve a oralidade e o gosto pela leitura.", "media": [{"t": "i", "src": "img/contando-01.jpg", "w": 1280, "h": 960}]}, {"id": "quadrinhos", "cat": "leitura", "title": "História em Quadrinhos", "fdesc": "leitura de HQ e seus recursos visuais", "desc": "Trabalhei a leitura de histórias em quadrinhos, chamando a atenção para balões, onomatopeias, enquadramento e sequência dos quadros.", "obj": "Compreender textos multimodais, integrando linguagem verbal e visual na construção de sentidos.", "base": "Os quadrinhos combinam texto e imagem, e a escola precisa formar leitores para textos que misturam linguagens.", "media": [{"t": "i", "src": "img/quadrinhos-01.jpg", "w": 1280, "h": 960}]}, {"id": "charges", "cat": "leitura", "title": "Trabalhando Charges", "fdesc": "leitura e interpretação de charges coladas no caderno", "desc": "Os alunos leram charges, identificaram o tema e a crítica e registraram a interpretação no caderno.", "obj": "Reconhecer humor, ironia e crítica social e relacionar o texto ao contexto em que circula.", "base": "Compreender um gênero inclui entender sua finalidade e o contexto em que ele circula, e a charge é ótima para desenvolver o olhar crítico.", "media": [{"t": "i", "src": "img/charges-01.jpg", "w": 1280, "h": 960}, {"t": "i", "src": "img/charges-02.jpg", "w": 1280, "h": 960}]}, {"id": "poema", "cat": "leitura", "title": "Trabalhando Poema", "fdesc": "leitura coletiva do poema O Pato com apoio audiovisual", "desc": "Fizemos a leitura coletiva do poema “O Pato”, com o texto na lousa e a animação projetada.", "obj": "Perceber ritmo, rima e sonoridade do texto poético e ler com expressividade.", "base": "A leitura literária também é fruição. O apoio da animação aproxima o texto dos alunos.", "media": [{"t": "i", "src": "img/poema-01.jpg", "w": 1280, "h": 960}, {"t": "i", "src": "img/poema-02.jpg", "w": 1280, "h": 960}]}, {"id": "versos", "cat": "leitura", "title": "Criando Versos", "fdesc": "produção autoral de versos a partir de textos-modelo", "desc": "Depois de lerem folhetos e revistas como referência, os alunos escreveram e ilustraram seus próprios versos.", "obj": "Produzir texto poético autoral, explorando rima, ritmo e organização em versos e estrofes.", "base": "Com um modelo de referência e uma finalidade clara, o aluno escreve como autor, não apenas como copiador.", "media": [{"t": "i", "src": "img/versos-01.jpg", "w": 960, "h": 1280}, {"t": "i", "src": "img/versos-02.jpg", "w": 960, "h": 1280}]}, {"id": "reescrita", "cat": "leitura", "title": "Reescrita do Artigo", "fdesc": "leitura e reescrita de artigo em grupo", "desc": "Em grupo, os alunos leram um artigo, discutiram as ideias principais e reescreveram o texto com as próprias palavras.", "obj": "Identificar informações principais, parafrasear e revisar o texto produzido.", "base": "O texto é um processo: ele melhora em versões sucessivas, e reescrever ensina tanto quanto escrever.", "media": [{"t": "i", "src": "img/reescrita-01.jpg", "w": 960, "h": 1280}]}, {"id": "detetive", "cat": "leitura", "title": "Detetive Literário", "fdesc": "leitura investigativa com pistas e mapa", "desc": "Propus que os alunos lessem um texto como detetives: buscando pistas, consultando um mapa e respondendo às questões.", "obj": "Localizar informações explícitas e fazer inferências a partir de indícios do texto.", "base": "Compreender um texto é construir sentido a partir do que está escrito e do que o leitor já sabe.", "media": [{"t": "i", "src": "img/detetive-01.jpg", "w": 960, "h": 1280}]}, {"id": "misterio", "cat": "leitura", "title": "Descubra o Mistério", "fdesc": "enigma narrativo projetado para a turma", "desc": "Projetei um enigma para a turma, e os alunos registraram hipóteses até chegar à solução.", "obj": "Levantar hipóteses, argumentar com base em evidências e verificar conclusões.", "base": "O desafio mobiliza o raciocínio, a argumentação oral e a escrita para justificar hipóteses.", "media": [{"t": "i", "src": "img/misterio-01.jpg", "w": 1280, "h": 960}]}, {"id": "conclusoes", "cat": "leitura", "title": "Jogo das Conclusões", "fdesc": "inferência a partir de cartas-pista com apresentação oral", "desc": "Nesta atividade do PAP, cada grupo recebeu cartas com situações, chegou a uma conclusão e apresentou para a turma.", "obj": "Fazer inferências, justificar o raciocínio e desenvolver a oralidade em situação pública.", "base": "Ao explicar a conclusão para a turma, o aluno organiza o próprio pensamento por meio da linguagem.", "media": [{"t": "i", "src": "img/conclusoes-01.jpg", "w": 960, "h": 1280}, {"t": "i", "src": "img/conclusoes-02.jpg", "w": 960, "h": 1280}, {"t": "i", "src": "img/conclusoes-03.jpg", "w": 960, "h": 1280}, {"t": "i", "src": "img/conclusoes-04.jpg", "w": 1280, "h": 960}, {"t": "i", "src": "img/conclusoes-05.jpg", "w": 960, "h": 1280}, {"t": "i", "src": "img/conclusoes-06.jpg", "w": 960, "h": 1280}, {"t": "i", "src": "img/conclusoes-07.jpg", "w": 1280, "h": 960}, {"t": "i", "src": "img/conclusoes-08.jpg", "w": 960, "h": 1280}]}, {"id": "pap", "cat": "leitura", "title": "Estudo Complementar do PAP", "fdesc": "leitura autônoma no caderno de estudo complementar", "desc": "Usamos o caderno de Estudo Complementar do Projeto de Apoio Pedagógico para leitura e exercícios autônomos.", "obj": "Consolidar aprendizagens e desenvolver autonomia e organização nos estudos.", "base": "A recuperação precisa ser contínua, com atividades variadas que retomam o que ainda não foi consolidado.", "media": [{"t": "i", "src": "img/pap-01.jpg", "w": 1280, "h": 960}]}]}, {"id": "numeros", "n": "04", "area": "Matemática", "title": "Números, Operações e Frações", "color": "#2D6FD1", "intro": "Parto do concreto para chegar ao abstrato. Material dourado, discos de frações, dominós e jogos de cálculo ajudam meus alunos a entender o sistema de numeração e o significado das operações antes de formalizar no caderno. Para mim, o material é meio, não fim, e o jogo cria situações-problema de verdade.", "acts": [{"id": "quatro-op", "cat": "numeros", "title": "Quatro Operações", "fdesc": "situações-problema e dominó de operações com grãos de milho", "desc": "Trabalhei situações-problema na lousa e um dominó de operações, com grãos de milho para contar e registro no caderno.", "obj": "Compreender os significados de adição, subtração, multiplicação e divisão e escolher a operação adequada a cada problema.", "base": "O sentido de cada operação se constrói em situações variadas, não em contas soltas.", "media": [{"t": "i", "src": "img/quatro-op-01.jpg", "w": 960, "h": 1280}, {"t": "i", "src": "img/quatro-op-02.jpg", "w": 960, "h": 1280}, {"t": "i", "src": "img/quatro-op-03.jpg", "w": 1280, "h": 960}, {"t": "i", "src": "img/quatro-op-04.jpg", "w": 1280, "h": 960}, {"t": "i", "src": "img/quatro-op-05.jpg", "w": 960, "h": 1280}, {"t": "i", "src": "img/quatro-op-06.jpg", "w": 1280, "h": 960}, {"t": "i", "src": "img/quatro-op-07.jpg", "w": 960, "h": 1280}]}, {"id": "jogo-4op", "cat": "numeros", "title": "Jogo das 4 Operações", "fdesc": "jogo da velha com contas de adição, subtração, multiplicação e divisão", "desc": "Usei o jogo da velha das operações: cada casa do tabuleiro traz uma conta de adição, subtração, multiplicação ou divisão. Quem resolve certo cobre a casa com a ficha do resultado, e vence quem completa três em linha.", "obj": "Desenvolver cálculo mental e fluência nas quatro operações, conferindo os resultados com o parceiro.", "base": "O jogo cria a necessidade de calcular e conferir com o colega, mantém a turma envolvida e mostra o erro na hora.", "media": [{"t": "i", "src": "img/jogo-4op-01.jpg", "w": 1280, "h": 960}, {"t": "i", "src": "img/jogo-4op-02.jpg", "w": 1280, "h": 960}, {"t": "i", "src": "img/jogo-4op-03.jpg", "w": 1280, "h": 960}, {"t": "i", "src": "img/jogo-4op-04.jpg", "w": 1280, "h": 960}, {"t": "i", "src": "img/jogo-4op-05.jpg", "w": 960, "h": 1280}, {"t": "i", "src": "img/jogo-4op-06.jpg", "w": 960, "h": 1280}, {"t": "i", "src": "img/jogo-4op-07.jpg", "w": 1280, "h": 960}]}, {"id": "adicoes", "cat": "numeros", "title": "Jogo das Adições", "fdesc": "ficha de adições com pareamento de resultados", "desc": "Propus uma ficha de desafios de adição em que os resultados deviam ser ligados corretamente.", "obj": "Consolidar fatos básicos da adição e estratégias de cálculo.", "base": "Retomar os fatos básicos em forma de jogo ajuda a memorizar com sentido.", "media": [{"t": "i", "src": "img/adicoes-01.jpg", "w": 1280, "h": 960}]}, {"id": "calculo", "cat": "numeros", "title": "Jogo do Cálculo", "fdesc": "tiras numéricas recortadas para montar e resolver cálculos", "desc": "Os alunos recortaram tiras numéricas, montaram cálculos e colaram a resolução no caderno.", "obj": "Organizar o cálculo, relacionar ordens e classes e registrar o procedimento.", "base": "A ação com o material vem antes do registro e dá apoio para a representação no papel.", "media": [{"t": "i", "src": "img/calculo-01.jpg", "w": 1280, "h": 960}]}, {"id": "operacoes", "cat": "numeros", "title": "Operações Matemáticas", "fdesc": "resolução de situações-problema a partir de textos", "desc": "Trabalhei a leitura de textos e enunciados com dados numéricos e a resolução das situações-problema, no caderno e na lousa.", "obj": "Interpretar enunciados, selecionar dados relevantes e validar a resposta.", "base": "Resolver problemas envolve compreender o enunciado, planejar, executar e conferir a resposta.", "media": [{"t": "i", "src": "img/operacoes-01.jpg", "w": 960, "h": 1280}, {"t": "i", "src": "img/operacoes-02.jpg", "w": 1280, "h": 960}, {"t": "i", "src": "img/operacoes-03.jpg", "w": 1280, "h": 960}, {"t": "i", "src": "img/operacoes-04.jpg", "w": 1280, "h": 960}, {"t": "i", "src": "img/operacoes-05.jpg", "w": 960, "h": 1280}]}, {"id": "potencias", "cat": "numeros", "title": "Aprendendo Potências", "fdesc": "cálculo de potências como multiplicação de fatores iguais", "desc": "Os alunos resolveram uma lista de potências escrevendo cada uma como multiplicação de fatores iguais (por exemplo, 5³ = 5 · 5 · 5 = 125) e armaram as contas no caderno para conferir.", "obj": "Compreender a potenciação como multiplicação de fatores iguais, identificar base e expoente e reconhecer casos especiais, como base 0, base 1 e potências de 10.", "base": "Escrever a multiplicação por extenso antes do resultado evita o erro clássico de multiplicar a base pelo expoente (5³ = 15) e deixa o raciocínio visível.", "media": [{"t": "i", "src": "img/potencias-01.jpg", "w": 960, "h": 1280}]}, {"id": "divisao", "cat": "numeros", "title": "Atividades de Divisão", "fdesc": "situações-problema de divisão resolvidas pelo método da chave", "desc": "Com uma ficha de situações-problema do PAP, os alunos interpretaram cada enunciado, armaram a divisão pelo método da chave e usaram a tabuada como apoio.", "obj": "Resolver problemas de divisão com o algoritmo da chave, compreendendo a divisão como repartição em partes iguais e conferindo o resultado com a multiplicação.", "base": "Problemas de repartir e de agrupar dão sentido à conta, e conferir com a multiplicação mostra a relação entre as duas operações.", "media": [{"t": "i", "src": "img/divisao-01.jpg", "w": 1280, "h": 960}]}, {"id": "dourado", "cat": "numeros", "title": "Usando Material Dourado", "fdesc": "valor posicional e operações com material dourado", "desc": "Com cubinhos, barras e placas do material dourado, os alunos representaram números e resolveram operações, registrando no caderno.", "obj": "Compreender o sistema de numeração decimal: agrupamentos de 10, valor posicional, reserva e troca.", "base": "O material dourado é eficaz quando a ação com as peças é ligada à reflexão sobre a conta armada.", "media": [{"t": "i", "src": "img/dourado-01.jpg", "w": 1280, "h": 960}, {"t": "i", "src": "img/dourado-02.jpg", "w": 1280, "h": 960}, {"t": "i", "src": "img/dourado-03.jpg", "w": 1280, "h": 960}]}, {"id": "fracoes", "cat": "numeros", "title": "Trabalhando Frações", "fdesc": "frações com discos coloridos fracionados", "desc": "Os alunos montaram e compararam inteiros com discos coloridos divididos em partes iguais.", "obj": "Compreender a fração como parte de um todo, comparar frações e perceber equivalências.", "base": "Trabalhar a fração com materiais diferentes torna a equivalência visível e ajuda a entender seus vários significados.", "media": [{"t": "i", "src": "img/fracoes-01.jpg", "w": 960, "h": 1280}, {"t": "i", "src": "img/fracoes-02.jpg", "w": 1280, "h": 960}, {"t": "i", "src": "img/fracoes-03.jpg", "w": 1280, "h": 960}, {"t": "i", "src": "img/fracoes-04.jpg", "w": 1280, "h": 960}, {"t": "i", "src": "img/fracoes-05.jpg", "w": 960, "h": 1280}]}]}, {"id": "geometria", "n": "05", "area": "Matemática", "title": "Geometria e Localização", "color": "#7A4FD0", "intro": "Acredito em construir para compreender. Ao montar poliedros com palitos e massinha, meus alunos passam de reconhecer as formas a analisar suas propriedades: vértices, arestas e faces. A localização em malhas quadriculadas prepara o trabalho com coordenadas.", "acts": [{"id": "solidos", "cat": "geometria", "title": "Sólidos Geométricos", "fdesc": "construção de poliedros com palitos e massinha e planificações", "desc": "A partir de fichas com planificações, os alunos construíram prismas e pirâmides com palitos e massinha e contaram vértices, arestas e faces.", "obj": "Reconhecer poliedros, relacionar figura espacial e planificação e quantificar seus elementos.", "base": "Construir o sólido com as próprias mãos faz o aluno passar de reconhecer a forma a analisar suas propriedades.", "media": [{"t": "i", "src": "img/solidos-01.jpg", "w": 720, "h": 1280}, {"t": "i", "src": "img/solidos-02.jpg", "w": 1280, "h": 960}, {"t": "i", "src": "img/solidos-03.jpg", "w": 1113, "h": 1280}, {"t": "i", "src": "img/solidos-04.jpg", "w": 1280, "h": 960}, {"t": "i", "src": "img/solidos-05.jpg", "w": 1280, "h": 960}, {"t": "i", "src": "img/solidos-06.jpg", "w": 1280, "h": 960}, {"t": "i", "src": "img/solidos-07.jpg", "w": 1280, "h": 960}, {"t": "i", "src": "img/solidos-08.jpg", "w": 1280, "h": 960}, {"t": "i", "src": "img/solidos-09.jpg", "w": 1280, "h": 960}, {"t": "i", "src": "img/solidos-10.jpg", "w": 1280, "h": 960}, {"t": "v", "src": "vid/solidos-11.mp4", "poster": "img/solidos-11-poster.jpg", "w": 480, "h": 864, "dur": 21.083}, {"t": "i", "src": "img/solidos-12.jpg", "w": 1280, "h": 960}, {"t": "i", "src": "img/solidos-13.jpg", "w": 1280, "h": 960}, {"t": "i", "src": "img/solidos-14.jpg", "w": 1280, "h": 960}, {"t": "i", "src": "img/solidos-15.jpg", "w": 1280, "h": 960}, {"t": "i", "src": "img/solidos-16.jpg", "w": 960, "h": 1280}, {"t": "i", "src": "img/solidos-17.jpg", "w": 960, "h": 1280}, {"t": "i", "src": "img/solidos-18.jpg", "w": 960, "h": 1280}, {"t": "i", "src": "img/solidos-19.jpg", "w": 1280, "h": 960}, {"t": "i", "src": "img/solidos-20.jpg", "w": 1280, "h": 960}, {"t": "i", "src": "img/solidos-21.jpg", "w": 960, "h": 1280}, {"t": "i", "src": "img/solidos-22.jpg", "w": 1280, "h": 960}, {"t": "i", "src": "img/solidos-23.jpg", "w": 1280, "h": 960}, {"t": "i", "src": "img/solidos-24.jpg", "w": 1280, "h": 960}, {"t": "i", "src": "img/solidos-25.jpg", "w": 1280, "h": 960}, {"t": "i", "src": "img/solidos-26.jpg", "w": 1280, "h": 960}]}, {"id": "batalha", "cat": "geometria", "title": "Batalha Naval", "fdesc": "localização por coordenadas em malha quadriculada", "desc": "Jogamos batalha naval em duplas, localizando os alvos por pares de coordenadas.", "obj": "Localizar e descrever posições em malha quadriculada usando coordenadas.", "base": "Localizar posições numa malha é a base do plano cartesiano, e o jogo dá sentido ao uso das coordenadas.", "media": [{"t": "i", "src": "img/batalha-01.jpg", "w": 1280, "h": 960}, {"t": "i", "src": "img/batalha-02.jpg", "w": 1280, "h": 960}, {"t": "i", "src": "img/batalha-03.jpg", "w": 1280, "h": 960}]}]}, {"id": "estatistica", "n": "06", "area": "Matemática", "title": "Grandezas, Medidas e Estatística", "color": "#0E8FA8", "intro": "Faço pesquisa estatística com dados reais da turma: medimos, registramos em tabelas, construímos gráficos e interpretamos os resultados. Partimos de uma pergunta que faz sentido para eles e percorremos todo o ciclo da investigação.", "acts": [{"id": "levantamento", "cat": "estatistica", "title": "Levantando Dados para Gráficos", "fdesc": "medição da altura dos colegas com fita métrica", "desc": "Os alunos mediram a altura de colegas e de adultos da escola com fita métrica e anotaram os dados.", "obj": "Planejar e realizar coleta de dados, usando unidades de medida padronizadas.", "base": "Trabalho a pesquisa completa (pergunta, coleta, organização, análise e conclusão) com dados reais da turma.", "media": [{"t": "i", "src": "img/levantamento-01.jpg", "w": 960, "h": 1280}, {"t": "i", "src": "img/levantamento-02.jpg", "w": 960, "h": 1280}, {"t": "i", "src": "img/levantamento-03.jpg", "w": 960, "h": 1280}, {"t": "i", "src": "img/levantamento-04.jpg", "w": 960, "h": 1280}, {"t": "i", "src": "img/levantamento-05.jpg", "w": 960, "h": 1280}]}, {"id": "graficos-medidas", "cat": "estatistica", "title": "Gráficos e Unidades de Medida", "fdesc": "registro de medidas em tabelas e gráficos de barras", "desc": "Com fitas métricas e lápis de cor, os alunos organizaram as medidas em tabelas e construíram gráficos de barras no caderno.", "obj": "Relacionar medidas, unidades e representações gráficas.", "base": "Medir dá significado aos números que aparecem no gráfico e une medidas e estatística.", "media": [{"t": "i", "src": "img/graficos-medidas-01.jpg", "w": 1280, "h": 960}, {"t": "i", "src": "img/graficos-medidas-02.jpg", "w": 1280, "h": 960}, {"t": "i", "src": "img/graficos-medidas-03.jpg", "w": 960, "h": 1280}, {"t": "i", "src": "img/graficos-medidas-04.jpg", "w": 1280, "h": 960}]}, {"id": "graficos-tabelas", "cat": "estatistica", "title": "Gráficos e Tabelas", "fdesc": "construção de gráficos de barras em cartaz e no caderno", "desc": "Em grupos, os alunos construíram gráficos de barras em cartazes, com título, eixos e legenda, e apresentaram para a turma.", "obj": "Ler, interpretar e construir tabelas e gráficos, comunicando conclusões.", "base": "Ler e produzir gráficos é uma competência importante para entender as informações do dia a dia.", "media": [{"t": "i", "src": "img/graficos-tabelas-01.jpg", "w": 960, "h": 1280}, {"t": "i", "src": "img/graficos-tabelas-02.jpg", "w": 1280, "h": 960}, {"t": "i", "src": "img/graficos-tabelas-03.jpg", "w": 1280, "h": 960}]}, {"id": "calendario", "cat": "estatistica", "title": "Trabalhando o Calendário", "fdesc": "leitura do calendário e medidas de tempo", "desc": "Trabalhei com o calendário anual para localizar datas, contar intervalos e relacionar dias, semanas e meses.", "obj": "Ler e usar o calendário e operar com medidas de tempo.", "base": "O tempo é uma grandeza do cotidiano, e o calendário é o instrumento social para medi-lo.", "media": [{"t": "i", "src": "img/calendario-01.jpg", "w": 1280, "h": 960}]}]}, {"id": "logica", "n": "07", "area": "Interdisciplinar", "title": "Jogos de Raciocínio Lógico", "color": "#C2417F", "intro": "Uso jogos de regras e desafios para trabalhar atenção, levantamento de hipóteses, antecipação e verificação. O jogo une diversão e intenção pedagógica, e a interação entre colegas durante a partida é onde muita aprendizagem acontece.", "acts": [{"id": "frutas", "cat": "logica", "title": "Jogo das Frutas", "fdesc": "dominó hexagonal de correspondência de frutas", "desc": "Os alunos encaixaram peças hexagonais com frutas e nomes por correspondência e registraram as composições em uma ficha.", "obj": "Desenvolver atenção, estratégia e associação entre imagem e palavra, além de cooperação no grupo.", "base": "O jogo une diversão e intenção pedagógica, e registrar as jogadas na ficha transforma o jogo em reflexão.", "media": [{"t": "i", "src": "img/frutas-01.jpg", "w": 1280, "h": 960}, {"t": "i", "src": "img/frutas-02.jpg", "w": 1280, "h": 960}, {"t": "i", "src": "img/frutas-03.jpg", "w": 720, "h": 1280}, {"t": "i", "src": "img/frutas-04.jpg", "w": 960, "h": 1280}, {"t": "i", "src": "img/frutas-05.jpg", "w": 960, "h": 1280}, {"t": "i", "src": "img/frutas-06.jpg", "w": 960, "h": 1280}, {"t": "i", "src": "img/frutas-07.jpg", "w": 960, "h": 1280}, {"t": "i", "src": "img/frutas-08.jpg", "w": 960, "h": 1280}, {"t": "i", "src": "img/frutas-09.jpg", "w": 960, "h": 1280}, {"t": "i", "src": "img/frutas-10.jpg", "w": 1280, "h": 960}, {"t": "i", "src": "img/frutas-11.jpg", "w": 720, "h": 1280}]}, {"id": "enigmas", "cat": "logica", "title": "Decifrando Enigmas Matemáticos", "fdesc": "desafios de lógica matemática em tablets", "desc": "Em duplas, os alunos resolveram enigmas matemáticos em um aplicativo no tablet e anotaram as estratégias no caderno.", "obj": "Desenvolver raciocínio lógico, persistência e uso de tecnologia com finalidade de aprendizagem.", "base": "Uso a tecnologia com uma finalidade clara de aprendizagem e a resolução de problemas como eixo da matemática.", "media": [{"t": "i", "src": "img/enigmas-01.jpg", "w": 1280, "h": 960}]}, {"id": "criptograma", "cat": "logica", "title": "Criptograma", "fdesc": "quebra-cabeça de palavras e encaixe", "desc": "Propus um quebra-cabeça em que as palavras deviam ser encaixadas ou decifradas de acordo com as pistas e os espaços.", "obj": "Mobilizar ortografia, contagem de letras e estratégias de tentativa e verificação.", "base": "Nos desafios, o aluno planeja, testa e corrige as próprias estratégias.", "media": [{"t": "i", "src": "img/criptograma-01.jpg", "w": 1280, "h": 960}]}]}]</script>
+<script>
+(function(){
+const EDIT = { on:false, db:null, user:null, assets:null, write:null, open:false, pending:false };
+const STATIC_JSON = document.getElementById('data').textContent;
+const CATS = [];
+const PAL = {alfabetizacao:'#FF5A5F',ortografia:'#FF9F1C',leitura:'#2EC4B6',numeros:'#3A86FF',geometria:'#8338EC',estatistica:'#06A77D',logica:'#FF4FA3'};
+const ICO = {
+ alfabetizacao:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 19l4-12 4 12M4.3 15h5.4"/><path d="M14 7h4a2.5 2.5 0 0 1 0 5h-4zM14 12h4.5a2.5 2.5 0 0 1 0 5H14z"/></svg>',
+ ortografia:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l1-5L16 4l4 4L9 19z"/><path d="M14 6l4 4"/></svg>',
+ leitura:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5c3-1 6-1 9 1 3-2 6-2 9-1v14c-3-1-6-1-9 1-3-2-6-2-9-1z"/><path d="M12 6v14"/></svg>',
+ numeros:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M7 4v8M3 8h8M14 8h7M3 17l5 0M15 14l5 5M20 14l-5 5"/></svg>',
+ geometria:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M12 12l8-4.5M12 12L4 7.5M12 12v9"/></svg>',
+ estatistica:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M4 20h16"/><rect x="5" y="11" width="3.5" height="9" rx="1"/><rect x="10.3" y="5" width="3.5" height="15" rx="1"/><rect x="15.6" y="9" width="3.5" height="11" rx="1"/></svg>',
+ logica:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"><path d="M9 4h3a2 2 0 1 1 4 0h3v5a2 2 0 1 0 0 4v6h-5a2 2 0 1 0-4 0H5v-6a2 2 0 1 1 0-4V4z"/></svg>'
+};
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const norm = s => s.normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase();
+const ACTS = {}, CATMAP = {};
+let OVER = {};
+const okSrc = s => typeof s==='string' && /^\/?(img\/|vid\/|_blob\/)[\w.\-\/]+$/.test(s);
+const fixSrc = s => s;
+const str = (v,n) => typeof v==='string' ? v.slice(0,n) : '';
+function cleanMedia(list){ return (Array.isArray(list)?list:[]).filter(m=>m && (m.t==='i'||m.t==='v') && okSrc(m.src) && (m.t==='i' || !m.poster || okSrc(m.poster))).slice(0,80).map(m=>({t:m.t, src:fixSrc(m.src), poster:fixSrc(m.poster||''), w:+m.w||1200, h:+m.h||900, dur:+m.dur||0, asset:typeof m.asset==='string'?m.asset:undefined, passet:typeof m.passet==='string'?m.passet:undefined})); }
+function rebuild(){
+  const base = JSON.parse(STATIC_JSON);
+  CATS.length = 0; Object.keys(ACTS).forEach(k=>delete ACTS[k]); Object.keys(CATMAP).forEach(k=>delete CATMAP[k]);
+  const all = {}, order = [];
+  base.forEach(c => { c.color = PAL[c.id] || c.color; CATMAP[c.id] = c; CATS.push(c); c.acts.forEach(a => { a.cat = c.id; a.media.forEach(m=>{ m.src=fixSrc(m.src); if(m.poster) m.poster=fixSrc(m.poster); }); all[a.id] = a; order.push(a.id); }); c.acts = []; });
+  const extra = [];
+  Object.keys(OVER).forEach(id => { const d = OVER[id]; if (!d || typeof d!=='object') return;
+    if (d.deleted) { if (all[id]) all[id].deleted = true; return; }
+    const f = { title: str(d.title,120), desc: str(d.desc,2000), obj: str(d.obj,2000), base: str(d.base,2000), cat: CATMAP[d.cat] ? d.cat : null, media: cleanMedia(d.media) };
+    if (all[id]) { const a = all[id]; if (f.title) a.title = f.title; a.desc = f.desc; a.obj = f.obj; a.base = f.base; if (f.cat) a.cat = f.cat; a.media = f.media; a.edited = true; }
+    else if (f.cat && f.title) { all[id] = Object.assign({ id, created: +d.createdAt||0, isNew: true }, f); extra.push(id); } });
+  extra.sort((x,y)=>all[x].created-all[y].created);
+  order.concat(extra).forEach(id => { const a = all[id]; if (!a || a.deleted) return; const c = CATMAP[a.cat]; if (!c) return; a.c = c; c.acts.push(a); ACTS[id] = a; });
+}
+rebuild();
+document.addEventListener('error', e => {
+  const el = e.target; if (!el || !/^(IMG|VIDEO)$/.test(el.tagName) || el.dataset.fb) return;
+  const raw = el.getAttribute('src') || ''; let alt = null;
+  if (/^\/(img|vid)\//.test(raw)) alt = raw.slice(1); else if (/^(img|vid)\//.test(raw)) alt = '/' + raw;
+  if (alt) { el.dataset.fb = '1'; el.setAttribute('src', alt); }
+}, true);
+const thumb = m => m.t === 'v' ? m.poster : m.src;
+const imgsOf = c => c.acts.flatMap(a => a.media.filter(m=>m.t==='i'));
+const count = a => { const f=a.media.filter(m=>m.t==='i').length, v=a.media.length-f; return [f?`${f} foto${f>1?'s':''}`:'', v?`${v} vídeo${v>1?'s':''}`:''].filter(Boolean).join(' · '); };
+const nAct = () => Object.keys(ACTS).length;
+const nImg = () => CATS.reduce((s,c)=>s+imgsOf(c).length,0);
+const nVid = () => CATS.reduce((s,c)=>s+c.acts.reduce((t,a)=>t+a.media.filter(m=>m.t==='v').length,0),0);
+const play = '<svg width="22" height="22" viewBox="0 0 24 24" fill="#2B2D42"><path d="M8 5v14l11-7z"/></svg>';
+const star = (x,y,s,c,r)=>`<svg class="doodle hide-sm" style="left:${x};top:${y};width:${s}px;transform:rotate(${r}deg)" viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 17l-6.1 3.4 1.5-6.8L2.2 9l6.9-.7z" fill="${c}" stroke="#2B2D42" stroke-width="1.6" stroke-linejoin="round"/></svg>`;
+const squig = (x,y,w,c,r)=>`<svg class="doodle hide-sm" style="left:${x};top:${y};width:${w}px;transform:rotate(${r}deg)" viewBox="0 0 100 20"><path d="M2 10 Q12 0 22 10 T42 10 T62 10 T82 10 T98 10" fill="none" stroke="${c}" stroke-width="5" stroke-linecap="round"/></svg>`;
+
+function renderNav(){
+$('#chips').innerHTML = CATS.map(c=>`<a class="chip" href="#${c.id}" data-cat="${c.id}" style="--c:${c.color}"><span class="ico">${ICO[c.id]}</span>${esc(c.title)}</a>`).join('');
+
+$('#sheetlist').innerHTML = CATS.map(c=>`<a class="srow" href="#${c.id}" style="--c:${c.color}"><span class="si">${ICO[c.id]}</span><span><b>${esc(c.title)}</b><small>${c.acts.length} atividade${c.acts.length>1?'s':''}</small></span><span class="chev">›</span></a>`).join('');
+}
+renderNav();
+const sheet=$('#sheet');
+function openSheet(){ sheet.classList.add('open'); sheet.setAttribute('aria-hidden','false'); }
+function closeSheet(){ sheet.classList.remove('open'); sheet.setAttribute('aria-hidden','true'); }
+$('#tabEixos').addEventListener('click',openSheet);
+sheet.addEventListener('click',e=>{ if(e.target===sheet || e.target.closest('.srow')) closeSheet(); });
+$('#tabBusca').addEventListener('click',()=>{ const go=()=>{const q=$('#q'); if(q){ const y=q.getBoundingClientRect().top+window.scrollY-90; window.scrollTo({top:y,behavior:'smooth'}); setTimeout(()=>q.focus({preventScroll:true}),350);} };
+  if((location.hash.slice(1)||'inicio')!=='inicio'){ location.hash='inicio'; setTimeout(go,60);} else go(); });
+const fmt = s => { s=Math.max(0,Math.floor(s||0)); return Math.floor(s/60)+':'+String(s%60).padStart(2,'0'); };
+const ICONS = {play:'<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>', pause:'<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>', fs:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>', back:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M11 17l-5-5 5-5M18 17l-5-5 5-5"/></svg>'};
+const vname = a => a.id==='leitura-voz' ? 'Leitura' : 'Vídeo';
+function playerHTML(a, vids){
+  return `<div class="player-wrap">
+    <div class="phone"><div class="screen" id="scr"><video id="pv" playsinline preload="metadata" poster="${vids[0].poster}" src="${vids[0].src}"></video>
+      <span class="vlabel" id="vlab">${vname(a)} 1</span>
+      <button class="bigplay" id="bp" aria-label="Reproduzir">${play.replace('width="22" height="22"','width="38" height="38"')}</button>
+      <div class="ctrl"><div class="prog"><div class="fill" id="pf"></div><div class="knob" id="pk"></div><input type="range" id="pr" min="0" max="1000" value="0" aria-label="Posição do vídeo"></div>
+        <div class="crow"><button class="cbtn" id="pp" aria-label="Reproduzir ou pausar">${ICONS.play}</button><button class="cbtn" id="rw" aria-label="Voltar 5 segundos">${ICONS.back}</button><span class="time" id="pt">0:00 / ${fmt(vids[0].dur)}</span><button class="cbtn speed" id="sp" aria-label="Velocidade">1x</button><button class="cbtn" id="fs" aria-label="Tela cheia">${ICONS.fs}</button></div></div></div></div>
+    <div class="plist"><h3>${a.id==='leitura-voz'?'Registros de leitura':'Vídeo da atividade'}${vids.length>1&&a.id!=='leitura-voz'?'s':''}</h3><p class="hint">${vids.length>1?'Toque em um vídeo para assistir. Eles tocam em sequência.':'Toque no play para assistir.'}</p>
+      ${vids.map((m,k)=>`<button class="pitem" data-v="${k}" aria-current="${k===0}"><span class="th"><img src="${m.poster}" alt=""><span>${play}</span></span><span><b>${vname(a)} ${k+1}</b><small>${fmt(m.dur)} min</small><span class="now">Tocando agora<span class="eq"><i></i><i></i><i></i></span></span></span></button>`).join('')}
+    </div></div>`;
+}
+function initPlayer(a){
+  const vids=a.media.filter(m=>m.t==='v'), v=$('#pv'); if(!v) return;
+  const scr=$('#scr'), pp=$('#pp'), pr=$('#pr'), pf=$('#pf'), pk=$('#pk'), pt=$('#pt'), sp=$('#sp');
+  let cur=0, idleT=null; const speeds=[1,1.25,1.5,0.75];
+  const items=[...document.querySelectorAll('.pitem')];
+  function sel(i, play){ cur=i; v.src=vids[i].src; v.poster=vids[i].poster; $('#vlab').textContent=vname(a)+' '+(i+1);
+    items.forEach((b,k)=>b.setAttribute('aria-current',k===i)); pf.style.width='0'; pk.style.left='0'; pt.textContent=`0:00 / ${fmt(vids[i].dur)}`;
+    if(play) v.play().catch(()=>{}); }
+  const toggle=()=>{ if(v.paused) v.play().catch(()=>{}); else v.pause(); };
+  const wake=()=>{ scr.classList.remove('idle'); clearTimeout(idleT); idleT=setTimeout(()=>scr.classList.add('idle'),2200); };
+  v.addEventListener('play',()=>{ scr.classList.add('playing'); pp.innerHTML=ICONS.pause; document.querySelector('.plist').classList.remove('paused'); wake(); });
+  v.addEventListener('pause',()=>{ scr.classList.remove('playing','idle'); pp.innerHTML=ICONS.play; document.querySelector('.plist').classList.add('paused'); });
+  v.addEventListener('timeupdate',()=>{ const d=v.duration||vids[cur].dur, p=d?v.currentTime/d:0; pf.style.width=(p*100)+'%'; pk.style.left=(p*100)+'%'; pr.value=Math.round(p*1000); pt.textContent=`${fmt(v.currentTime)} / ${fmt(d)}`; });
+  v.addEventListener('ended',()=>{ if(cur<vids.length-1) sel(cur+1,true); });
+  v.addEventListener('ratechange',()=>{ sp.textContent=String(v.playbackRate).replace('.',',')+'x'; });
+  $('#bp').addEventListener('click',e=>{e.stopPropagation(); v.play().catch(()=>{});});
+  v.addEventListener('click',toggle);
+  pp.addEventListener('click',e=>{e.stopPropagation(); toggle();});
+  $('#rw').addEventListener('click',e=>{e.stopPropagation(); v.currentTime=Math.max(0,v.currentTime-5);});
+  sp.addEventListener('click',e=>{e.stopPropagation(); const i=(speeds.indexOf(v.playbackRate)+1)%speeds.length; v.playbackRate=speeds[i]; sp.textContent=String(speeds[i]).replace('.',',')+'x';});
+  pr.addEventListener('input',()=>{ const d=v.duration||vids[cur].dur; v.currentTime=pr.value/1000*d; });
+  $('#fs').addEventListener('click',e=>{ e.stopPropagation(); try{ const r=scr.requestFullscreen||scr.webkitRequestFullscreen; if(document.fullscreenElement){document.exitFullscreen();} else if(r){ const p=r.call(scr); if(p&&p.catch) p.catch(()=>{ if(v.webkitEnterFullscreen) v.webkitEnterFullscreen(); }); } else if(v.webkitEnterFullscreen) v.webkitEnterFullscreen(); }catch(_){ } });
+  scr.addEventListener('mousemove',wake); scr.addEventListener('touchstart',wake,{passive:true});
+  items.forEach((b,k)=>b.addEventListener('click',()=>{ if(k===cur) toggle(); else sel(k,true); }));
+  document.querySelector('.plist').classList.add('paused');
+}
+
+function actCard(a){
+  const m=a.media, isV=m.length&&m[0].t==='v';
+  const ph = m.length ? `<span class="ph"><img class="bg" src="${thumb(m[0])}" alt="" loading="lazy" aria-hidden="true"><img class="fg" src="${thumb(m[0])}" alt="" loading="lazy">${isV?`<span class="play"><span>${play}</span></span>`:''}<span class="count">${count(a)}</span></span>` : `<span class="ph empty">${ICO[a.c.id]}</span>`;
+  return `<a class="act-card" href="#${a.id}" style="--c:${a.c.color}"><span class="pola">
+    ${ph}
+    <span class="txt"><h3>${esc(a.title)}</h3><p>${esc(a.desc)}</p><span class="go">Ver atividade →</span></span></span></a>`;
+}
+
+function home(){
+  const picks=[['solidos',2,'Sólidos!'],['fracoes',2,'Frações'],['frutas',4,'Jogo das Frutas'],['graficos-tabelas',1,'Nossos gráficos']].filter(([id])=>ACTS[id]&&ACTS[id].media.length).map(([id,i,c])=>[id,Math.min(i,ACTS[id].media.length-1),c]);
+  return `<div class="view">
+  <section class="wrap hero">
+    ${star('46%','8%',34,'#FFD23F',12)}${star('2%','88%',24,'#2EC4B6',-10)}${squig('30%','92%',110,'#FF5A5F',-4)}
+    <div>
+      <span class="sticker" style="--c:var(--blue);margin-bottom:10px">Projeto de Apoio Pedagógico</span><br><span class="hello">Olá! Eu sou a Professora Claudia Cabral</span>
+      <h1>Aprender <span class="hl">brincando</span>, fazendo e descobrindo juntos</h1>
+      <p class="lead">Este é o meu portfólio. Aqui reúno os jogos, os materiais concretos, as leituras e a mão na massa que uso para recompor e aprofundar as aprendizagens dos meus alunos em Língua Portuguesa e Matemática. Escolha um eixo e conheça cada atividade.</p>
+      <div class="stats">
+        <div class="stat" style="--c:#FF5A5F"><b>${nAct()}</b><span>atividades</span></div>
+        <div class="stat" style="--c:#3A86FF"><b>${CATS.length}</b><span>eixos</span></div>
+        <div class="stat" style="--c:#2EC4B6"><b>${nImg()}</b><span>fotos</span></div>
+        <div class="stat" style="--c:#FF9F1C"><b>${nVid()}</b><span>vídeos</span></div>
+      </div>
+    </div>
+    <div class="board">${picks.map(([id,i,cap],k)=>`<a class="p${k+1}" href="#${id}" aria-label="${esc(ACTS[id].title)}"><span class="pola" style="display:block"><span class="ph2"><img class="bg" src="${thumb(ACTS[id].media[i])}" alt="" aria-hidden="true"><img class="fg" src="${thumb(ACTS[id].media[i])}" alt="${esc(ACTS[id].title)}"></span><span class="cap">${cap}</span></span></a>`).join('')}</div>
+  </section>
+  <section class="sec" id="video-projeto" style="padding-top:0"><div class="wrap">
+    <span class="hand" style="font-size:1.6rem;color:var(--red)">Um pouco da nossa sala de aula</span>
+    <h2 class="sec-title">Vídeo do projeto</h2>
+    <p class="sec-sub">Fotos das atividades, a construção dos sólidos geométricos e a leitura em voz alta, em 2 minutos.</p>
+    <div class="hvid" id="hvw"><video id="hv" src="vid/video-projeto.mp4" poster="img/video-projeto-poster.jpg" preload="metadata" playsinline controls></video>
+      <span class="tag2">▶ 2 min</span><button type="button" class="hbig" id="hvb" aria-label="Assistir ao vídeo do projeto"><svg width="44" height="44" viewBox="0 0 24 24" fill="#2B2D42"><path d="M8 5v14l11-7z"/></svg></button></div>
+  </div></section>
+  <section class="sec" id="eixos"><div class="wrap">
+    <span class="hand" style="font-size:1.6rem;color:var(--blue)">Por onde começar?</span>
+    <h2 class="sec-title">Escolha um eixo de aprendizagem</h2>
+    <p class="sec-sub">Organizei as atividades por eixo: cada um reúne práticas com a mesma intenção. Clique para ver todas.</p>
+    <label class="search"><span style="position:absolute;left:-9999px">Buscar atividade</span>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+      <input id="q" type="search" placeholder="Procurar atividade (ex.: frações, rima, gráfico)" autocomplete="off"></label>
+    <div class="note" id="note" aria-live="polite"></div>
+    <div class="act-grid" id="results" style="display:none"></div>
+    <div class="cat-grid" id="catgrid">${CATS.map(c=>{const im=imgsOf(c); const pick=[...new Set([im[0],im[Math.floor(im.length/3)],im[Math.floor(2*im.length/3)]])].filter(Boolean);
+      return `<a class="cat-card" href="#${c.id}" style="--c:${c.color}">
+        <span class="cat-top"><span class="num">${c.n}</span><span class="big-ico">${ICO[c.id]}</span><span class="area">${esc(c.area)}</span></span>
+        <span class="cat-body"><h3>${esc(c.title)}</h3>
+          <span class="minis">${pick.map(m=>`<img src="${m.src}" alt="" loading="lazy">`).join('')}<span class="plus">+${c.acts.length}</span></span>
+          <p>${esc(c.acts.slice(0,3).map(a=>a.title).join(' · '))}${c.acts.length>3?' e mais':''}</p>
+          <span class="go">Entrar →</span></span></a>`}).join('')}</div>
+  </div></section>
+  ${principlesSection()}</div>`;
+}
+function principlesSection(){
+  const P=[['#FF5A5F','Aprender com o outro','Trabalho com duplas, grupos e apresentações orais, porque o aluno faz com ajuda hoje o que fará sozinho amanhã.','Aprendizagem colaborativa'],
+           ['#3A86FF','Do concreto ao abstrato','Uso material dourado, discos de frações, palitos e letras móveis antes de levar o conteúdo para o caderno.','Material manipulável'],
+           ['#FF4FA3','O jogo ensina','Nos jogos, meus alunos precisam ler, calcular, argumentar e conferir. Para mim, o erro faz parte do caminho.','Aprendizagem lúdica'],
+           ['#2EC4B6','Registrar para avaliar','Registro tudo em fotos, vídeos e produções: assim acompanho o processo de cada aluno e planejo os próximos passos.','Avaliação formativa']];
+  return `<section class="sec" id="sec-principios"><div class="wrap">
+    <span class="hand" style="font-size:1.6rem;color:var(--pink)">O que está por trás de cada atividade</span>
+    <h2 class="sec-title">Como eu ensino</h2><p class="sec-sub">Quatro princípios que guiam o meu planejamento.</p>
+    <div class="p-grid">${P.map(([c,t,d,w])=>`<article class="p-card" style="--c:${c}"><h3>${t}</h3><p>${d}</p><span class="who">${w}</span></article>`).join('')}</div>
+  </div></section>`;
+}
+function catView(c){
+  return `<div class="view" style="--c:${c.color}"><div class="wrap">
+    <nav class="crumbs" aria-label="Você está em"><a href="#inicio">← Início</a><span class="here">${esc(c.title)}</span></nav>
+    <header class="cat-hero"><span class="big-ico">${ICO[c.id]}</span>
+      <div><span class="sticker">${esc(c.area)} · ${c.acts.length} atividades</span><h1>${esc(c.title)}</h1><p>${esc(c.intro)}</p></div>
+      <span class="num" aria-hidden="true">${c.n}</span></header>
+    <div class="act-grid">${EDIT.on?`<button type="button" class="newcard" data-new="${c.id}"><span>+</span>Nova atividade</button>`:''}${c.acts.map(actCard).join('')}</div>
+  </div></div>`;
+}
+function actView(a){
+  const c=a.c, i=c.acts.indexOf(a), prev=c.acts[i-1], next=c.acts[i+1];
+  const imgs=a.media.filter(m=>m.t==='i'), vids=a.media.filter(m=>m.t==='v');
+  return `<div class="view" style="--c:${c.color}"><div class="wrap">
+    <nav class="crumbs" aria-label="Você está em"><a href="#inicio">← Início</a><a href="#${c.id}">${esc(c.title)}</a><span class="here">${esc(a.title)}</span></nav>
+    <header class="act-head"><div><span class="sticker" style="--c:${c.color}">${esc(c.area)}</span><h1>${esc(a.title)}</h1><p class="lead">${esc(a.desc)}</p>${EDIT.on?`<div class="edtools"><button type="button" class="ebtn" data-edit="${a.id}">✏️ Editar atividade</button><button type="button" class="ebtn danger" data-del="${a.id}">Excluir</button></div>`:''}</div>
+      <div class="counter">${count(a)||'sem fotos'}<br>atividade ${i+1} de ${c.acts.length}</div></header>
+    <div class="act-layout">
+      <div>
+        ${vids.length?playerHTML(a,vids):''}
+        ${imgs.length?`<div class="gallery${imgs.length===1?' single':''}">${imgs.map(m=>{const k=a.media.indexOf(m);return `<button data-open="${a.id}" data-i="${k}" aria-label="Ampliar foto ${k+1} de ${a.media.length}"><span class="pola" style="display:block"><img src="${m.src}" width="${m.w}" height="${m.h}" alt="${esc(a.title)}, registro ${k+1}" loading="${k<4?'eager':'lazy'}"></span></button>`}).join('')}</div>`:''}
+      </div>
+      <aside class="side">
+        <div class="note-card y"><h4><i>1</i>O que eu propus</h4><p>${esc(a.desc)}</p></div>
+        <div class="note-card g"><h4><i>2</i>Meu objetivo</h4><p>${esc(a.obj)}</p></div>
+        <div class="note-card p"><h4><i>3</i>Por que escolhi</h4><p>${esc(a.base)}</p></div>
+      </aside>
+    </div>
+    <nav class="pager" aria-label="Outras atividades">
+      ${prev?`<a href="#${prev.id}"><small>← Anterior</small><span>${esc(prev.title)}</span></a>`:''}
+      ${next?`<a class="next" href="#${next.id}"><small>Próxima →</small><span>${esc(next.title)}</span></a>`:`<a class="next" href="#${c.id}"><small>Voltar ao eixo →</small><span>${esc(c.title)}</span></a>`}
+    </nav>
+  </div></div>`;
+}
+function route(keep){
+  const h = decodeURIComponent(location.hash.slice(1)) || 'inicio';
+  const sy = window.scrollY;
+  let html, active=null, nav=null, title='Projeto de Apoio Pedagógico · Professora Claudia Cabral', scrollTo=null;
+  if (CATMAP[h]) { html=catView(CATMAP[h]); active=h; title=`${CATMAP[h].title} · Profª Claudia Cabral`; }
+  else if (ACTS[h]) { html=actView(ACTS[h]); active=ACTS[h].c.id; title=`${ACTS[h].title} · Profª Claudia Cabral`; }
+  else { html=home(); nav = h==='principios'?'principios':'inicio'; if(h==='principios') scrollTo='sec-principios'; }
+  $('#app').innerHTML = html; document.title = title;
+  const isSub = !!(CATMAP[h]||ACTS[h]); document.body.classList.toggle('sub', isSub);
+  $('#apptitle').textContent = CATMAP[h] ? CATMAP[h].title : (ACTS[h] ? ACTS[h].title : '');
+  $('#back').setAttribute('href', ACTS[h] ? '#'+ACTS[h].c.id : '#inicio');
+  const tab = isSub ? 'eixos' : (h==='principios' ? 'principios' : 'inicio');
+  document.querySelectorAll('.tabbar [data-tab]').forEach(x=>x.classList.toggle('on', x.dataset.tab===tab));
+  if (ACTS[h] && ACTS[h].media.some(m=>m.t==='v')) initPlayer(ACTS[h]);
+  document.querySelectorAll('.chip').forEach(x=>{ if(x.dataset.cat===active) x.setAttribute('aria-current','page'); else x.removeAttribute('aria-current'); });
+  document.querySelectorAll('[data-nav]').forEach(x=>{ if(x.dataset.nav===nav) x.setAttribute('aria-current','page'); else x.removeAttribute('aria-current'); });
+  const ac=document.querySelector('.chip[aria-current]'); if(ac) ac.scrollIntoView({block:'nearest',inline:'center'});
+  if(keep===true){ window.scrollTo(0,sy); }
+  else { if(scrollTo){ const el=document.getElementById(scrollTo); window.scrollTo(0, el.getBoundingClientRect().top + window.scrollY - 130); } else window.scrollTo(0,0);
+  $('#app').focus({preventScroll:true}); }
+  const q=$('#q'); if(q) q.addEventListener('input',search);
+  const hv=$('#hv'); if(hv){ const w=$('#hvw'); $('#hvb').addEventListener('click',()=>{ hv.play().catch(()=>{}); });
+    hv.addEventListener('play',()=>w.classList.add('playing')); hv.addEventListener('pause',()=>{ if(!hv.seeking) w.classList.remove('playing'); }); hv.addEventListener('ended',()=>w.classList.remove('playing')); }
+}
+function search(){
+  const q=norm($('#q').value.trim()), res=$('#results'), grid=$('#catgrid');
+  if(!q){ res.style.display='none'; res.innerHTML=''; grid.style.display=''; $('#note').textContent=''; return; }
+  const hits=Object.values(ACTS).filter(a=>norm([a.title,a.desc,a.obj,a.c.title,a.c.area].join(' ')).includes(q));
+  res.innerHTML = hits.map(actCard).join(''); res.style.display=''; grid.style.display='none';
+  $('#note').textContent = hits.length ? `Achei ${hits.length} atividade${hits.length!==1?'s':''}!` : 'Ops! Nenhuma atividade com esse nome.';
+}
+window.addEventListener('hashchange', ()=>route()); route();
+
+const lb=$('#lb'); let A=null, I=0, lastFocus=null;
+function open(id,i){ A=ACTS[id]; I=i; lastFocus=document.activeElement; lb.classList.add('open'); document.body.style.overflow='hidden';
+  $('#lbstrip').innerHTML = A.media.map((m,k)=>`<button data-k="${k}" aria-label="Registro ${k+1}"><img src="${thumb(m)}" alt="" loading="lazy"></button>`).join('');
+  $('#lbstrip').style.display = A.media.length>1?'':'none';
+  $('#lbp').style.visibility = $('#lbn').style.visibility = A.media.length>1?'':'hidden';
+  show(); $('#lbx').focus(); }
+function show(){ const m=A.media[I];
+  $('#lbt').innerHTML = `${esc(A.title)}<small>foto ${I+1} de ${A.media.length}</small>`;
+  $('#lbm').innerHTML = m.t==='v' ? `<video src="${m.src}" poster="${m.poster}" controls playsinline preload="metadata"></video>` : `<img src="${m.src}" alt="${esc(A.title)}, registro ${I+1} de ${A.media.length}">`;
+  document.querySelectorAll('#lbstrip button').forEach((b,k)=>{b.setAttribute('aria-current',k===I); if(k===I) b.scrollIntoView({block:'nearest',inline:'center'});}); }
+function go(d){ I=(I+d+A.media.length)%A.media.length; show(); }
+function close(){ lb.classList.remove('open'); $('#lbm').innerHTML=''; document.body.style.overflow=''; if(lastFocus) lastFocus.focus({preventScroll:true}); }
+document.addEventListener('click',e=>{const b=e.target.closest('[data-open]'); if(b){open(b.dataset.open,+b.dataset.i);}});
+$('#lbx').onclick=close; $('#lbp').onclick=()=>go(-1); $('#lbn').onclick=()=>go(1);
+$('#lbstrip').addEventListener('click',e=>{const b=e.target.closest('button'); if(b){I=+b.dataset.k; show();}});
+$('#lbs').addEventListener('click',e=>{ if(e.target===e.currentTarget||e.target.id==='lbm') close(); });
+document.addEventListener('keydown',e=>{ if(!lb.classList.contains('open')) return;
+  if(e.key==='Escape') close(); else if(e.key==='ArrowRight') go(1); else if(e.key==='ArrowLeft') go(-1);
+  else if(e.key==='Tab'){ const f=[...lb.querySelectorAll('button,video')].filter(x=>x.offsetParent); const i=f.indexOf(document.activeElement);
+    if(e.shiftKey&&i<=0){e.preventDefault();f[f.length-1].focus();} else if(!e.shiftKey&&i===f.length-1){e.preventDefault();f[0].focus();} } });
+
+/* ================= Área da professora ================= */
+const PASS_HASH = '7d4f7cc4b8360553ca8b118fc48e226371a94bb5cd3f728094229c8d0f002bcf';
+function sha256hex(s){ // implementação compacta (fallback quando crypto.subtle não existe)
+  const K=[0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,0x3956c25b,0x59f111f1,0x923f82a4,0xab1c5ed5,0xd807aa98,0x12835b01,0x243185be,0x550c7dc3,0x72be5d74,0x80deb1fe,0x9bdc06a7,0xc19bf174,0xe49b69c1,0xefbe4786,0x0fc19dc6,0x240ca1cc,0x2de92c6f,0x4a7484aa,0x5cb0a9dc,0x76f988da,0x983e5152,0xa831c66d,0xb00327c8,0xbf597fc7,0xc6e00bf3,0xd5a79147,0x06ca6351,0x14292967,0x27b70a85,0x2e1b2138,0x4d2c6dfc,0x53380d13,0x650a7354,0x766a0abb,0x81c2c92e,0x92722c85,0xa2bfe8a1,0xa81a664b,0xc24b8b70,0xc76c51a3,0xd192e819,0xd6990624,0xf40e3585,0x106aa070,0x19a4c116,0x1e376c08,0x2748774c,0x34b0bcb5,0x391c0cb3,0x4ed8aa4a,0x5b9cca4f,0x682e6ff3,0x748f82ee,0x78a5636f,0x84c87814,0x8cc70208,0x90befffa,0xa4506ceb,0xbef9a3f7,0xc67178f2];
+  const b=new TextEncoder().encode(s), l=b.length, n=((l+9+63)>>6)<<6, m=new Uint8Array(n); m.set(b); m[l]=0x80;
+  const dv=new DataView(m.buffer); dv.setUint32(n-4,l*8); let H=[0x6a09e667,0xbb67ae85,0x3c6ef372,0xa54ff53a,0x510e527f,0x9b05688c,0x1f83d9ab,0x5be0cd19]; const w=new Uint32Array(64);
+  const r=(x,y)=>(x>>>y)|(x<<(32-y));
+  for(let o=0;o<n;o+=64){ for(let i=0;i<16;i++) w[i]=dv.getUint32(o+i*4);
+    for(let i=16;i<64;i++){ const s0=r(w[i-15],7)^r(w[i-15],18)^(w[i-15]>>>3), s1=r(w[i-2],17)^r(w[i-2],19)^(w[i-2]>>>10); w[i]=(w[i-16]+s0+w[i-7]+s1)|0; }
+    let [a,b2,c,d,e,f,g,h]=H;
+    for(let i=0;i<64;i++){ const t1=(h+(r(e,6)^r(e,11)^r(e,25))+((e&f)^(~e&g))+K[i]+w[i])|0, t2=((r(a,2)^r(a,13)^r(a,22))+((a&b2)^(a&c)^(b2&c)))|0; h=g; g=f; f=e; e=(d+t1)|0; d=c; c=b2; b2=a; a=(t1+t2)|0; }
+    H=[H[0]+a,H[1]+b2,H[2]+c,H[3]+d,H[4]+e,H[5]+f,H[6]+g,H[7]+h].map(x=>x|0); }
+  return H.map(x=>(x>>>0).toString(16).padStart(8,'0')).join('');
+}
+async function hashPass(p){ try{ if(window.crypto && crypto.subtle){ const d=await crypto.subtle.digest('SHA-256', new TextEncoder().encode(p)); return [...new Uint8Array(d)].map(x=>x.toString(16).padStart(2,'0')).join(''); } }catch(_){} return sha256hex(p); }
+const store = { get(k){ try{ return sessionStorage.getItem(k); }catch(_){ return null; } }, set(k,v){ try{ v==null?sessionStorage.removeItem(k):sessionStorage.setItem(k,v); }catch(_){} } };
+
+function openModal(id){ const m=$(id); m.classList.add('open'); EDIT.open = id==='#mEdit'; const f=m.querySelector('input,select,textarea,button'); if(f) setTimeout(()=>f.focus(),30); }
+function closeModal(id){ $(id).classList.remove('open'); if(id==='#mEdit'){ EDIT.open=false; if(EDIT.pending){ EDIT.pending=false; route(true); } } }
+document.querySelectorAll('.modal').forEach(m=>{ m.addEventListener('click',e=>{ if(e.target===m || e.target.closest('[data-close]')) closeModal('#'+m.id); }); });
+document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ const m=document.querySelector('.modal.open'); if(m) closeModal('#'+m.id); } });
+
+function setEditing(on){
+  EDIT.on = on; document.body.classList.toggle('editing', on);
+  $('#loginBtn').classList.toggle('on', on); $('#loginTxt').textContent = on ? 'Modo edição' : 'Área da professora';
+  updateWarn(); route(true);
+}
+function updateWarn(){
+  let w='';
+  if (!EDIT.db) w='Para salvar, abra o portfólio pelo claude.ai com a conta convidada como Editora.';
+  else if (EDIT.write===false) w='Esta conta pode ver, mas não editar. Peça para ser convidada como Editora.';
+  $('#editwarn').textContent = w;
+}
+$('#loginBtn').addEventListener('click',()=>{ if(EDIT.on){ location.hash = location.hash || '#inicio'; return; } $('#loginErr').textContent=''; $('#fLogin').reset(); openModal('#mLogin'); });
+$('#fLogin').addEventListener('submit', async e=>{ e.preventDefault(); const f=e.target;
+  const ok = f.u.value.trim().toLowerCase()==='claudia' && (await hashPass(f.p.value))===PASS_HASH;
+  if(!ok){ $('#loginErr').textContent='Usuário ou senha incorretos.'; return; }
+  store.set('pf-edit','1'); closeModal('#mLogin'); setEditing(true); });
+$('#ebOut').addEventListener('click',()=>{ store.set('pf-edit',null); setEditing(false); });
+$('#ebNew').addEventListener('click',()=>{ const h=decodeURIComponent(location.hash.slice(1)); openEditor(null, CATMAP[h]?h:(ACTS[h]?ACTS[h].c.id:CATS[0].id)); });
+document.addEventListener('click',e=>{
+  const n=e.target.closest('[data-new]'); if(n){ openEditor(null, n.dataset.new); return; }
+  const ed=e.target.closest('[data-edit]'); if(ed){ openEditor(ed.dataset.edit); return; }
+  const dl=e.target.closest('[data-del]'); if(dl){ askDelete(dl.dataset.del); return; }
+});
+
+/* ---------- editor ---------- */
+let ED = null;
+const slug = s => norm(s).replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,40) || 'atividade';
+function openEditor(id, catId){
+  const a = id ? ACTS[id] : null;
+  ED = { id: a ? a.id : null, created: a && a.created ? a.created : 0, media: a ? a.media.map(m=>Object.assign({},m)) : [], busy:0 };
+  const f=$('#fEdit'); f.reset();
+  $('#edCat').innerHTML = CATS.map(c=>`<option value="${c.id}">${esc(c.n+' · '+c.title)}</option>`).join('');
+  f.title.value = a ? a.title : ''; f.cat.value = a ? a.c.id : (catId||CATS[0].id);
+  f.desc.value = a ? a.desc||'' : ''; f.obj.value = a ? a.obj||'' : ''; f.base.value = a ? a.base||'' : '';
+  $('#mEditT').textContent = a ? 'Editar atividade' : 'Nova atividade';
+  $('#edDel').style.display = a ? '' : 'none';
+  $('#edErr').textContent=''; $('#edLog').textContent='';
+  const canUp = !!EDIT.assets; $('#edUpl').classList.toggle('off', !canUp); $('#edFile').disabled = !canUp;
+  $('#edUplT').textContent = canUp ? 'Adicionar fotos e vídeos' : 'Envio de fotos indisponível nesta conta';
+  renderMed(); openModal('#mEdit');
+}
+function renderMed(){
+  $('#edMedia').innerHTML = ED.media.map((m,k)=>`<div class="medit"><img src="${thumb(m)||''}" alt="">${k===0?'<span class="cv">capa</span>':''}${m.t==='v'?'<span class="vt">▶ vídeo</span>':''}
+    <span class="mb">${k>0?`<button type="button" data-cover="${k}" title="Usar como capa" aria-label="Usar como capa">★</button>`:''}<button type="button" data-rm="${k}" title="Remover" aria-label="Remover">✕</button></span></div>`).join('') || '<p style="margin:0;color:var(--ink-2);font-weight:600">Nenhuma foto ainda.</p>';
+}
+$('#edMedia').addEventListener('click',e=>{ const c=e.target.closest('[data-cover]'), r=e.target.closest('[data-rm]');
+  if(c){ const k=+c.dataset.cover; const [m]=ED.media.splice(k,1); ED.media.unshift(m); renderMed(); }
+  if(r){ ED.media.splice(+r.dataset.rm,1); renderMed(); } });
+
+function loadImg(file){ return new Promise((res,rej)=>{ const u=URL.createObjectURL(file), im=new Image(); im.onload=()=>res({im,u}); im.onerror=()=>{URL.revokeObjectURL(u); rej(new Error('img'));}; im.src=u; }); }
+function toBlob(cv,q){ return new Promise(r=>cv.toBlob(r,'image/jpeg',q)); }
+async function shrink(file){ const {im,u}=await loadImg(file); const s=Math.min(1,1600/Math.max(im.naturalWidth,im.naturalHeight)); const w=Math.round(im.naturalWidth*s), h=Math.round(im.naturalHeight*s);
+  const cv=document.createElement('canvas'); cv.width=w; cv.height=h; cv.getContext('2d').drawImage(im,0,0,w,h); URL.revokeObjectURL(u); return {blob:await toBlob(cv,.82), w, h}; }
+function videoInfo(file){ return new Promise((res)=>{ const u=URL.createObjectURL(file), v=document.createElement('video'); v.muted=true; v.playsInline=true; v.preload='auto';
+  let done=false; const fin=(x)=>{ if(done) return; done=true; URL.revokeObjectURL(u); res(x); };
+  v.onloadeddata=()=>{ try{ v.currentTime=Math.min(1,(v.duration||2)/3); }catch(_){ fin({w:v.videoWidth,h:v.videoHeight,dur:v.duration,poster:null}); } };
+  v.onseeked=async()=>{ const s=Math.min(1,900/Math.max(v.videoWidth,v.videoHeight)||1); const cv=document.createElement('canvas'); cv.width=Math.round(v.videoWidth*s)||480; cv.height=Math.round(v.videoHeight*s)||864;
+    try{ cv.getContext('2d').drawImage(v,0,0,cv.width,cv.height); fin({w:v.videoWidth,h:v.videoHeight,dur:v.duration,poster:await toBlob(cv,.8)}); }catch(_){ fin({w:v.videoWidth,h:v.videoHeight,dur:v.duration,poster:null}); } };
+  v.onerror=()=>fin({w:480,h:864,dur:0,poster:null}); setTimeout(()=>fin({w:v.videoWidth||480,h:v.videoHeight||864,dur:v.duration||0,poster:null}),12000); v.src=u; }); }
+$('#edFile').addEventListener('change', async e=>{
+  const files=[...e.target.files]; e.target.value=''; if(!files.length || !EDIT.assets) return;
+  ED.busy++; $('#edSave').disabled=true; let okN=0, errs=[];
+  for(const [k,file] of files.entries()){
+    $('#edLog').textContent=`Enviando ${k+1} de ${files.length}…`;
+    try{
+      if(file.type.startsWith('image/')){ const r=await shrink(file); const up=await EDIT.assets.upload(r.blob); ED.media.push({t:'i',src:'/_blob/'+up.id,asset:up.id,w:r.w,h:r.h}); okN++; }
+      else if(file.type.startsWith('video/')){ if(file.size>20*1024*1024){ errs.push(`${file.name}: vídeo maior que 20 MB`); continue; }
+        const info=await videoInfo(file); const up=await EDIT.assets.upload(file); let pid=null; if(info.poster){ try{ pid=(await EDIT.assets.upload(info.poster)).id; }catch(_){} }
+        ED.media.push({t:'v',src:'/_blob/'+up.id,asset:up.id,poster:pid?'/_blob/'+pid:'',passet:pid||undefined,w:info.w||480,h:info.h||864,dur:info.dur||0}); okN++; }
+      else errs.push(`${file.name}: formato não aceito`);
+    }catch(err){ errs.push(`${file.name}: não foi possível enviar`); }
+    renderMed();
+  }
+  ED.busy--; $('#edSave').disabled=false;
+  $('#edLog').innerHTML = (okN?`<span class="mok">${okN} arquivo${okN>1?'s':''} adicionado${okN>1?'s':''}. Não esqueça de salvar.</span>`:'') + (errs.length?'<br>'+errs.map(esc).join('<br>'):'');
+});
+$('#fEdit').addEventListener('submit', async e=>{ e.preventDefault(); const f=e.target; if(ED.busy) return;
+  if(!EDIT.db){ $('#edErr').textContent='Não foi possível salvar aqui. Abra o portfólio pelo claude.ai, conectada com a conta convidada como Editora.'; return; }
+  const title=f.title.value.trim(); if(!title){ $('#edErr').textContent='Dê um título para a atividade.'; return; }
+  const id = ED.id || (slug(title)+'-'+Date.now().toString(36));
+  const now = Date.now();
+  const doc = { id, cat:f.cat.value, title, desc:f.desc.value.trim(), obj:f.obj.value.trim(), base:f.base.value.trim(),
+    media: ED.media.map(m=>{ const o={t:m.t,src:m.src,w:m.w,h:m.h}; if(m.poster) o.poster=m.poster; if(m.dur) o.dur=m.dur; if(m.asset) o.asset=m.asset; if(m.passet) o.passet=m.passet; return o; }),
+    createdAt: ED.created || (OVER[id]&&OVER[id].createdAt) || now, updatedAt: now };
+  $('#edSave').disabled=true; $('#edErr').textContent='';
+  try{ await EDIT.db.doc('acts/'+id).set(doc); OVER[id]=doc; rebuild(); renderNav(); closeModal('#mEdit');
+    if(location.hash==='#'+id) route(true); else location.hash=id; }
+  catch(err){ $('#edErr').textContent = (err&&err.code==='quota_exceeded') ? 'O espaço do portfólio está cheio. Remova fotos antigas e tente de novo.' : 'Não foi possível salvar. Confira se você está conectada com a conta convidada como Editora.'; }
+  finally{ $('#edSave').disabled=false; }
+});
+$('#edDel').addEventListener('click',()=>{ if(ED&&ED.id){ closeModal('#mEdit'); askDelete(ED.id); } });
+let DEL=null;
+function askDelete(id){ const a=ACTS[id]; if(!a) return; DEL=id; $('#mConfTx').textContent=`"${a.title}" vai sair do portfólio para todos.`; openModal('#mConf'); }
+$('#confYes').addEventListener('click', async ()=>{ const id=DEL; if(!id) return; const cat=ACTS[id]&&ACTS[id].c.id;
+  if(!EDIT.db){ $('#mConfTx').textContent='Não foi possível excluir aqui. Abra pelo claude.ai com a conta de Editora.'; return; }
+  try{ const doc={id, deleted:true, updatedAt:Date.now()}; await EDIT.db.doc('acts/'+id).set(doc); OVER[id]=doc; rebuild(); renderNav(); closeModal('#mConf'); location.hash=cat||'inicio'; }
+  catch(_){ $('#mConfTx').textContent='Não foi possível excluir. Confira se você está conectada com a conta de Editora.'; } });
+
+/* ---------- conexão com o banco de dados ---------- */
+(async()=>{
+  const C = window.claude; if(!C || typeof C.use!=='function') return;
+  try{ EDIT.user = await C.use('user'); }catch(_){}
+  try{ if(EDIT.user && EDIT.user.can){ const c = await Promise.resolve(EDIT.user.can('data.write')); EDIT.write = (c===true||c===false)?c:null; } }catch(_){}
+  try{ EDIT.assets = await C.use('assets'); }catch(_){}
+  let db=null; try{ db = await C.use('db'); }catch(_){}
+  EDIT.db = db; updateWarn(); if(!db) return;
+  try{
+    db.collection('acts').onSnapshot(snap=>{
+      const o={}; snap.docs.forEach(d=>{ if(d.exists) o[d.id]=d.data(); }); OVER=o; rebuild(); renderNav();
+      if(EDIT.open) EDIT.pending=true; else route(true);
+    }, ()=>{});
+  }catch(_){}
+})();
+if(!window.claude){ $('#loginBtn').style.display='none'; } else if(store.get('pf-edit')==='1') setEditing(true);
+
+let sx=null; $('#lbs').addEventListener('touchstart',e=>{sx=e.touches[0].clientX},{passive:true});
+$('#lbs').addEventListener('touchend',e=>{ if(sx===null) return; const dx=e.changedTouches[0].clientX-sx; if(Math.abs(dx)>50) go(dx<0?1:-1); sx=null; });
+})();
+</script>
+</body>
+</html>
